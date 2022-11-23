@@ -1,0 +1,83 @@
+<nav th:fragment="navigation" class="navbar">
+    <a href="/" class="navbar-brand ml-10 ml-sm-15">
+        <!-- <img th:src="@{/images/brand-logo.png}" class="mr-5 mr-sm-10" alt="logo"> -->
+    </a>
+    <ul class="navbar-nav hidden-sm-and-down">
+        <li sec:authorize="isAuthenticated()" class="nav-item">
+            <div>Angemeldet als: </div>
+            <small class="nav-item"  sec:authentication="name" >Reservierungen</small>
+            <!-- <small class="nav-item" sec:authentication="authorities" >Reservierungen</small> -->
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="reservations.html" th:href="@{/reservation}" sec:authorize="hasAnyRole('BOSS','EMPLOYEE')"
+                th:text="#{nav.reservations}">Reservierungen</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="orders.html" th:href="@{/orders}" sec:authorize="hasAnyRole('BOSS','EMPLOYEE')"
+                th:text="#{nav.orders}">Buchungen</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="extras.html" th:href="@{/extras}" sec:authorize="hasAnyRole('BOSS','EMPLOYEE')"
+                th:text="#{nav.extras}">Lager</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="users.html" th:href="@{/users}" sec:authorize="hasAnyRole('BOSS','EMPLOYEE')"
+                th:text="#{nav.customers}">Nutzer</a>
+        </li>
+        <li class="nav-item">
+            <a sec:authorize="!hasAnyRole('BOSS', 'EMPLOYEE')" class="nav-link" href="index.html" th:href="@{/}" th:text="#{nav.home}">Home</a>
+        </li>  
+        <li class="nav-item">
+            <a class="nav-link" href="catalog.html" th:href="@{/campsiteCatalog}" th:text="#{nav.all}">Alle Plätze</a>
+        </li>  
+        <li class="nav-item">
+            <a class="nav-link" sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" href="statistics.html" th:href="@{/statistics}" th:text="#{nav.statistics}">Statistik</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" href="defectCampsites.html" th:href="@{/defectCampsites}" th:text="#{nav.defect}">Defekt</a>
+        </li>
+        <li class="nav-item">
+            <a sec:authorize="!hasAnyRole('BOSS', 'EMPLOYEE')" class="nav-link" href="impressum.html" th:href="@{/impressum}" th:text="#{nav.impressum}">Impressum</a>
+        </li>
+        <li class="nav-item">
+            <a sec:authorize="!hasAnyRole('BOSS', 'EMPLOYEE')"
+            class="nav-link" href="datenschutz.html" th:href="@{/datenschutz}" th:text="#{nav.datenschutz}">Datenschutz</a>
+        </li>
+      
+    </ul>
+    <div class="navbar-content ml-auto">
+        <ul class="navbar-nav hidden-sm-and-down">
+            <li class="nav-item">
+                <a class="nav-link" href="employee.html" th:href="@{/employee}" sec:authorize="hasRole('BOSS')"
+                    th:text="#{nav.employee}">Bestellungen</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="profile.html" th:href="@{/profile}"
+                sec:authorize="isAuthenticated()"
+                    th:text="#{nav.profile}">Profil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  href="cart.html" th:href="@{/cart}"
+                    th:text="#{nav.cart}" value=#{cart.count}>Warenkorb</a>
+            </li>
+            <li class="nav-item">
+                <form class="nav-link" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                    <input class="btn btn-light" type="submit" th:value="#{nav.logout}">
+                </form>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.html" th:href="@{/login}" sec:authorize="!isAuthenticated()"
+                    th:text="#{nav.login}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="register.html" th:href="@{/register}"
+                    sec:authorize="!hasAnyRole('BOSS','CUSTOMER', 'EMPLOYEE')"
+                    th:text="#{nav.register}">Registrierung</a>
+            </li>
+        </ul>
+        <!-- <button class="btn btn-action mr-5" type="button" onclick="halfmoon.toggleDarkMode()"
+            onloadedmetadata="halfmoon.toggleDarkMode()" aria-label="Toggle dark mode">
+            <i class="fa fa-moon-o" aria-hidden="true"></i>
+        </button> -->
+    </div>
+</nav>

@@ -1,0 +1,65 @@
+<div th:replace="fragments/head"></div>
+
+<div class="ui container">
+    <header>
+        <h1 th:text="${customer.userAccount.id}">Kundenliste</h1>
+    </header>
+
+    <table class="ui celled table">
+        <thead>
+          <tr>
+            <th th:text="#{customers.name}">Name</th>
+            <th text="">Anschrift</th>
+            <th text="">Geburtstag</th>
+            <th text="">Historie</th>
+            <th></th>
+          </tr>
+        </thead>
+    
+       
+            <tr>
+                <td th:text="${customer.getName()}">Paul Test</td>
+                <td>
+                  <div th:text="${customer.getStreet()}">Straße 46></div>
+                  <div th:text="${customer.getCity()}">Stadt></div>
+                </td>
+                <td
+                  th:text="${#temporals.format(customer.getBirthDate(), 'dd.MM.yyyy')}"
+                ></td>
+    
+                <div th:each="val, stat : *{customer.userAccount.getRoles()}">
+                  <td>
+                    <a
+                      class="item"
+                      href="changeUserData.html"
+                      th:href="@{/changeUserData}"
+                      method="GET"
+                      th:text="#{user.change}"
+                      >Daten anpassen</a>
+                  </td>
+                  <td>
+                    <a sec:authorize="hasAnyRole('CUSTOMER')"
+                      class="item"
+                      href="orderhistory.html"
+                      th:href="@{/findOrdersByAccount}"
+                      method="GET"
+                      th:text="#{nav.orders}"
+                      >Bestellungen</a>
+                  </td>
+                  <td>
+                    <a
+                      sec:authorize="hasRole('CUSTOMER')"
+                      class="item"
+                      href="perma.html"
+                      th:href="@{/findPermaByAccount/{account} (account=${customer.userAccount.id})}"
+                      method="GET"
+                      >Aktive Dauercampingplätze</a>
+                    </td>
+                </div>
+            </tr>
+         
+      </table>
+
+</div>
+
+<div th:replace="fragments/foot"></div>

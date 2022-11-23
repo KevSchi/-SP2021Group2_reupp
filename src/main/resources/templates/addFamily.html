@@ -1,0 +1,108 @@
+<div th:replace="fragments/head"></div>
+
+
+
+<div class="w-400 mw-400 m-auto">
+
+    <div class="content text-extra-letter-spacing">
+        <h2 class="content-title">Buchungsnummer:</h2>
+        <p th:text="${order.id}">Kunde</p>
+    </div>
+
+    <div class="content text-extra-letter-spacing">
+        <h2 class="content-title">E-Mail Adresse:</h2>
+        <p th:text="${order.getName()}">Kunde</p>
+    </div>
+
+    <div class="content text-extra-letter-spacing">
+        <h2 class="content-title">Name:</h2>
+        <p th:text="${user.getName()}">Kunde</p>
+    </div>
+
+    <div class="content text-extra-letter-spacing">
+        <h2 class="content-title">Adresse:</h2>
+        <p th:text="${user.getStreet()}"></p>
+        <p th:text="${user.getCity()}"></p>
+        <p th:text="${user.getPlz()}"></p>
+    </div>
+
+    <div class="content text-extra-letter-spacing">
+        <h2 class="content-title">Geburtsdatum:</h2>
+        <p th:text="${user.getBirthDate()}"></p>
+    </div>
+
+    <div class="content text-extra-etter-spacing">
+        <form th:action="@{/checkin/{id}(id=${order.id})}" method="post" id="form">
+            <div class="form-group">
+                <h2 class="content-title" for="otherPeople">Bitte andere Personen angeben:</h2>
+                <div class="d-flex" id="addPersonContainer">
+                    <input class="form-control otherPeople" th:placeholder="#{family.others}" name="otherPeople" type="text" />
+                    <button class="btn btn-primary" id="addPersonBtn"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="custom-checkbox">
+                    <input type="checkbox" name="isInGroup" id="isInGroup" th:checked="${isInGroup}" >
+                    <label class="content-title" for="isInGroup">Ist der Kunde in einer Gruppe?</label>
+                </div>
+            </div>
+
+            <input class="btn btn-primary" type="submit" value="Erstellen">
+        </form>
+    </div>
+    <!-- user ist ein User. alle methoden die ich brauche müssen dort implementiert werden --> 
+</div>
+
+<script>
+    const btn = document.getElementById("addPersonBtn");
+
+    const form = document.getElementById("form");
+
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const div = duplicateChildNodes("addPersonContainer");
+        div.firstElementChild.value = "";
+        div.firstElementChild.nextElementSibling.id = "";
+        div.firstElementChild.nextElementSibling.classList.add("removeBtn");
+        div.firstElementChild.nextElementSibling.onclick = (e) => removePersonContainer(e);
+        div.firstElementChild.nextElementSibling.innerHTML = `<i class='fa fa-minus' aria-hidden='true'></i>`;
+        document.getElementById("addPersonContainer").parentNode.appendChild(div);
+    });
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        var values = [];
+        const inputs = document.querySelectorAll(".otherPeople");
+        for (let i = 0; i < inputs.length; i++) {
+            values.push(inputs[i].value);
+            if(i != 0) inputs[i].parentElement.remove();
+        }
+        btn.parentNode.firstElementChild.value = values;
+        form.submit();
+    });
+
+
+    function removePersonContainer(e){
+        e.preventDefault();
+        var target = e.target;
+        if(target.tagName == "I") target = target.parentNode;
+        target.parentNode.remove();
+    }
+
+    function duplicateChildNodes (parentId){
+        var parent = document.getElementById(parentId);
+        const div = document.createElement("div");
+        div.className = parent.className;
+        NodeList.prototype.forEach = Array.prototype.forEach;
+        var children = parent.childNodes;
+        children.forEach(function(item){
+            var cln = item.cloneNode(true);
+            div.appendChild(cln);
+        });
+        return div;
+    };
+
+</script>
+
+<div th:replace="fragments/foot"></div>

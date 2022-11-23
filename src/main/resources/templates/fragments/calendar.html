@@ -1,0 +1,50 @@
+<head>
+  <link th:href="@{/resources/css/caledar_style.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<div th:fragment="calendar">
+  <!-- <div class="content-wrapper with-navbar">
+    <div class="sticky-alerts"></div> -->
+  <div class="container1">
+    <div class="calendar">
+      <div class="month">
+        <i class="fa fa-chevron-left previous" aria-hidden="true"></i>
+        <div class="date">
+          <h1></h1>
+          <p>Thu June 01, 2021</p>
+        </div>
+        <i class="fa fa-chevron-right next" aria-hidden="true"></i>
+      </div>
+      <div class="weekdays">
+        <div>Mo</div>
+        <div>Di</div>
+        <div>Mi</div>
+        <div>Do</div>
+        <div>Fr</div>
+        <div>Sa</div>
+        <div>So</div>
+      </div>
+      <div class="days"></div>
+      <div class="reservation">
+        <div id="form" class="d-flex w-full mw-full m-auto form-inline p-10">
+          <div class="form-group my-5">
+            <label for="start" class="w-200">Startdatum:</label>
+            <input name="start" class="form-control disabled" disabled type="date" required="required" />
+          </div>
+          <div class="form-group my-5">
+            <label for="end" class="w-200">Enddatum:</label>
+            <input name="end" class="form-control disabled" disabled type="date" required="required" />
+          </div>
+          <div class="form-group my-5">
+            <label for="totalDays" class="w-200">Anzahl der Tage:</label>
+            <input name="totalDays" type="text" class="form-control disabled" disabled value="0" id="if-4-username">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div>
+  </div> -->
+  <!-- <script src="script.js"></script> -->
+  <script th:src="@{/resources/js/caledar_script.js}" defer></script>
+</div>

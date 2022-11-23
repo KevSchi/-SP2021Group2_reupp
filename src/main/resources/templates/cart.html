@@ -1,0 +1,104 @@
+<div th:replace="fragments/head"></div>
+
+<div class="container-fluid">
+    <br>
+    <header>
+        <h1 class="w-600 mw-600 m-auto text-center" th:text="#{cart.title}">Warenkorb</h1>
+    </header>
+    <br>
+    <table class="table w-600 mw-600 m-auto">
+
+        <thead>
+            <tr>
+                <th th:text="Platz">Titel</th>
+            </tr>
+        </thead>
+        <tbody th:remove="all-but-first">
+            <tr th:each="item : ${cart} ">
+                <td>
+                    <div class="cart-info">
+                        <!-- <img class="thumbnail"
+                            th:src="@{/resources/img/cover/{image}.jpg(image=${item.product.getImage()})}"
+                            src="../static/resources/img/cover/lac.jpg" /> -->
+
+                        <img th:src="@{/resources/img/campsite.jpg}" src="../static/resources/img/campsite.jpg"
+                            class="img-fluid rounded-top" alt="placeholder">
+                        <div>
+                            <p th:text="${item.productName}"></p>
+                        </br>
+
+                            <p class="text-muted">
+                                <span th:text="Größe">Action</span>
+                            </p>
+                            <th:block th:switch="${#strings.toString(item.product.size)}">
+                                <div th:case="'SMALL'">klein</div>
+                                <div th:case="'MEDIUM'">mittel</div>
+                                <div th:case="'LARGE'">groß</div>
+                            </th:block>
+                        </br>
+                            <p class="text-muted">
+
+                                <span th:text="Stellplatz">Action</span>
+
+                            </p>
+                            <th:block th:switch="${#strings.toString(item.product.parkingSpace)}">
+                                <div th:case="'NO'">Keiner</div>
+                                <div th:case="'BIKE'">Fahrrad</div>
+                                <div th:case="'CAR'">Auto</div>
+                                <div th:case="'TRAILER'">Wohnmobil</div>
+                            </th:block>
+                        </br>
+
+                            <p class="text-muted">
+
+                                <span th:text="Zeitraum">Action</span>
+
+                            </p>
+                            <p th:text="${#temporals.format(user.getStart(item), 'dd.MM.yyyy')}"></p>
+                            <p th:text="${#temporals.format(user.getEnd(item), 'dd.MM.yyyy')}"></p>    
+                        </br>
+
+                            <p class="text-muted">
+
+                                <span th:text="Preis">Action</span>
+
+                            </p>
+                            <p> <text th:text="${#numbers.formatDecimal(item.price.getNumber(), 0, 'COMMA', 2, 'POINT')}"/> <text>Euro</text></p>
+                    
+                            <form class="ui form" th:action="@{/remove}" method="post">
+                                <input type="hidden" name="identifier" th:value="${item.id}" />
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="icon edit"></i>
+                                    <span th:text="#{cart.delete}"> Werte aktualisieren</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="w-600 mw-600 m-auto text-center">
+
+        <div class="col" th:if="${!cart.empty}">
+            <div class="label" th:text="#{cart.total}">Summe</div>
+            <p> <text th:text="${#numbers.formatDecimal(cart.price.getNumber(), 0, 'COMMA', 2, 'POINT')}"/> <text>Euro</text></p>        </div>
+       <div class="col" th:if="${!cart.empty}">
+            <form sec:authorize="hasRole('CUSTOMER')" class="ui form" method="post" th:action="@{/reserve}">
+                <input type="hidden"  name="userAccount" id="userAccount" th:value="${user.userAccount.id}" />
+                <button type="submit" class="btn btn-primary" th:text="#{cart.reserve}">Reservieren</button>
+            </form>
+        </div>
+        <div class="col" th:if="${!cart.empty}">
+            <form sec:authorize="hasAnyRole('BOSS', 'EMPLOYEE')" class="ui form" method="get" th:action="@{/chooseAccount}">
+                <button type="submit" class="btn btn-primary" th:text="#{cart.reserve}">Reservieren</button>
+            </form>
+
+        </div>
+        <h2 id="leer" th:if="${cart.empty}" th:text="#{cart.empty}">Leer</h2>
+    </div>
+
+</div>
+
+<div th:replace="fragments/foot"></div>

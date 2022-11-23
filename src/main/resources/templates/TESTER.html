@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/TESTER" method="post">
+       
+        <input type="text" name="nachname" value="nachname" />
+       
+       
+        <div class="field">
+            <label for="nachname">Nachname</label>
+            <!-- <input id="nachname" name="nachname" th:field="*{nachname}" th:errorclass="fieldError" type="text" required="required"/><br/> -->
+           
+            <input id= "vorname" name="vorname"></input>
+            <!-- <div class="ui negative message" th:if="${#fields.hasErrors('nachname')}" th:errors="*{nachname}">
+                <p>Der Nachname darf nicht leer sein.</p>
+            </div> -->
+        </div>
+        <button type="submit" class="ui">Submit</button>
+
+    </form>
+
+
+
+   
+
+</body>
+
+</html>

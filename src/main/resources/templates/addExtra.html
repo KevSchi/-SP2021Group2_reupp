@@ -1,0 +1,124 @@
+<div th:replace="fragments/head"></div>
+<div class="container-fluid">
+
+
+<form class="w-400 mw-400 m-auto" onsubmit="return Filevalidation2()" id="form" role="form" th:action="@{/createExtra/}" method="post" enctype="multipart/form-data">
+    <header>
+        <h1>Extra erstellen</h1>
+    </header>
+   
+    <div class="form-group">
+    <label for="Name" class="required"> Name</label>
+    <input  required="true" th:placeholder="Name" class=form-control pattern="[A-Za-z0-9-,._& ]+" maxlength="25" type="field" name="name"/>
+</div>
+ 
+  <div class="form-group">
+
+    <label for="image">Bild vom Server</label>
+  <input th:placeholder="Bildname_mit_Endung" class=form-control type="text" name="imagename" />
+
+  </br>
+  <label>Bild hochladen</label></br>
+  <input
+    type="file"
+    onchange="Filevalidation()"
+    id="image"
+    name="image"
+    accept="image/png, image/jpeg"
+  />
+</div>
+  
+  <p id="size"></p>
+ 
+  <div class="form-group">
+
+    <label for="quantity" class="required"> Anzahl</label>
+  <input required="true" th:placeholder="Anzahl" class=form-control type="number" name="quantity" th:value="0" min="0" />
+</div>
+
+  <div class="form-group">
+
+    <label for="price" class="required"> Preis</label>
+  <input required="true" th:placeholder="Preis" class=form-control type="number" step="any" name="price" th:value="0" min="0" />
+</div>
+ 
+
+    <div class="custom-checkbox">
+      <input
+        type="checkbox"
+        name="returnable"
+        id="returnable"
+        th:checked="${returnable}"
+      />
+      <label class="content-title" for="returnable"
+        >Extra muss zurückgegeben werden</label
+      >
+    </div>
+    <br/>
+
+    <div class="custom-checkbox">
+        <input
+          type="checkbox"
+          name="paidDaily"
+          id="paidDaily"
+          th:checked="${paidDaily}"
+        />
+        <label class="content-title" for="paidDaily">Preis pro Tag</label>
+      </div>
+      <br/>
+
+    <div class="custom-checkbox">
+      <input
+        type="checkbox"
+        name="isRequired"
+        id="isRequired"
+        th:checked="${isRequired}"
+      />
+      <label class="content-title" for="isRequired">Extra muss bei Dauercampingplätzen gebucht werden</label>
+    </div>
+  <br />
+  <button type="submit" class="btn btn-primary">
+    <i class="icon edit"></i>
+    <span th:text="Erstellen"> Werte aktualisieren</span>
+  </button>
+</form>
+</div>
+
+<script>
+  function Filevalidation2() {
+    const fi = document.getElementById("image");
+
+    if (fi.files.length > 0) {
+      for (const i = 0; i <= fi.files.length - 1; i++) {
+        const fsize = fi.files.item(i).size;
+        const file = Math.round(fsize / 1024);
+        // The size of the file.
+        if (file >= 5096) {
+          alert("Die Größe der Datei sollte 5MB nicht übersteigen!");
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+  }
+
+  function Filevalidation() {
+    const fi = document.getElementById("image");
+    // Check if any file is selected.
+    if (fi.files.length > 0) {
+      for (const i = 0; i <= fi.files.length - 1; i++) {
+        const fsize = fi.files.item(i).size;
+        const file = Math.round(fsize / 1024);
+        // The size of the file.
+        if (file >= 5096) {
+          document.getElementById("size").innerHTML = "<b>" + file + "</b> KB";
+          alert("Die Größe der Datei sollte 5MB nicht übersteigen!");
+        } else {
+          document.getElementById("size").innerHTML = "<b>" + file + "</b> KB";
+        }
+      }
+    }
+  }
+</script>
+<div th:replace="fragments/foot"></div>

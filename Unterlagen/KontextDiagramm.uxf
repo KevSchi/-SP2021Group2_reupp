@@ -1,0 +1,56 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>1200</x><y>258</y><w>170</w><h>180</h></coordinates><panel_attributes>Mitarbeiter</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>518</y><w>190</w><h>160</h></coordinates><panel_attributes>Nicht Registrierter Nutzer
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>485</x><y>448</y><w>210</w><h>120</h></coordinates><panel_attributes>lt=&lt;-
+m2=Registrieren</panel_attributes><additional_attributes>190;10;190;90;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>335</x><y>258</y><w>340</w><h>50</h></coordinates><panel_attributes>lt=&lt;-
+Vorreservieren
+</panel_attributes><additional_attributes>318;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>325</x><y>338</y><w>340</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+Höhe Pauschalbetrag (Strom, Wasser...)
+
+</panel_attributes><additional_attributes>15;20;320;20</additional_attributes></element><element><id>Relation</id><coordinates><x>855</x><y>278</y><w>360</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+Sperren/Freigeben eines Platzes
+
+</panel_attributes><additional_attributes>13;20;340;20</additional_attributes></element><element><id>Relation</id><coordinates><x>835</x><y>448</y><w>370</w><h>120</h></coordinates><panel_attributes>lt=&lt;-
+Bilanzen einsehen
+
+</panel_attributes><additional_attributes>350;80;10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>855</x><y>358</y><w>360</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+Kaution und geliehene Sportgeräte
+
+</panel_attributes><additional_attributes>340;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>160</x><y>238</y><w>170</w><h>180</h></coordinates><panel_attributes>Registrierter Nutzer</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>655</x><y>248</y><w>200</w><h>200</h></coordinates><panel_attributes>Campingplatz</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>855</x><y>298</y><w>360</w><h>50</h></coordinates><panel_attributes>lt=&lt;-
+Status von Kaution und Leihartikel ändern
+</panel_attributes><additional_attributes>15;20;340;20</additional_attributes></element><element><id>Relation</id><coordinates><x>855</x><y>378</y><w>360</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+Rechnungen einsehen
+
+</panel_attributes><additional_attributes>340;20;10;21</additional_attributes></element><element><id>Relation</id><coordinates><x>855</x><y>338</y><w>360</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+Freie Tage/Stellplätze</panel_attributes><additional_attributes>340;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>475</x><y>448</y><w>300</w><h>230</h></coordinates><panel_attributes>lt=&lt;-
+Höhe Pauschalbetrag (Strom, Wasser...)
+
+</panel_attributes><additional_attributes>15;190;280;190;280;10</additional_attributes></element><element><id>Relation</id><coordinates><x>325</x><y>278</y><w>340</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+Freie Tage/Stellplätze
+
+</panel_attributes><additional_attributes>15;20;320;20</additional_attributes></element><element><id>Relation</id><coordinates><x>325</x><y>298</y><w>340</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+gezahlte Kautionen und geliehene Artikel
+
+</panel_attributes><additional_attributes>15;20;320;20</additional_attributes></element><element><id>Relation</id><coordinates><x>325</x><y>318</y><w>340</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+Kosten der Kaution und Artikel
+
+</panel_attributes><additional_attributes>15;20;320;20</additional_attributes></element><element><id>Relation</id><coordinates><x>475</x><y>448</y><w>280</w><h>210</h></coordinates><panel_attributes>lt=&lt;-
+Kosten der Kaution und Artikel
+
+</panel_attributes><additional_attributes>15;170;260;170;260;10</additional_attributes></element><element><id>Relation</id><coordinates><x>475</x><y>448</y><w>260</w><h>190</h></coordinates><panel_attributes>lt=&lt;-
+Kosten der Plätze
+
+</panel_attributes><additional_attributes>15;150;240;150;240;10</additional_attributes></element><element><id>Relation</id><coordinates><x>475</x><y>448</y><w>240</w><h>160</h></coordinates><panel_attributes>lt=&lt;-
+Freie Tage/Stellplätze
+</panel_attributes><additional_attributes>15;130;220;130;220;10</additional_attributes></element><element><id>Relation</id><coordinates><x>325</x><y>358</y><w>340</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+Kosten der Plätze
+
+</panel_attributes><additional_attributes>15;20;320;20</additional_attributes></element><element><id>Relation</id><coordinates><x>325</x><y>378</y><w>340</w><h>50</h></coordinates><panel_attributes>lt=&lt;-
+aktuelle Reservierungen und Kosten
+</panel_attributes><additional_attributes>15;20;320;20</additional_attributes></element><element><id>Relation</id><coordinates><x>855</x><y>258</y><w>360</w><h>50</h></coordinates><panel_attributes>lt=&lt;-
+Vorreservierung erstellen/bearbeiten/löschen
+</panel_attributes><additional_attributes>13;20;340;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1200</x><y>518</y><w>170</w><h>180</h></coordinates><panel_attributes>Admin</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1270</x><y>430</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>815</x><y>448</y><w>400</w><h>140</h></coordinates><panel_attributes>lt=&lt;-
+Mitarbeiter ansehen
+
+</panel_attributes><additional_attributes>375;100;10;100;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>795</x><y>448</y><w>410</w><h>150</h></coordinates><panel_attributes>lt=&lt;-
+m2=Mitarbeiter Account erstellen/bearbeiten</panel_attributes><additional_attributes>10;10;10;120;390;120</additional_attributes></element><element><id>Relation</id><coordinates><x>775</x><y>448</y><w>430</w><h>170</h></coordinates><panel_attributes>lt=&lt;-
+m2=Kosten von Kaution und Leihartikel ändern
+</panel_attributes><additional_attributes>10;10;10;140;410;140</additional_attributes></element></diagram>

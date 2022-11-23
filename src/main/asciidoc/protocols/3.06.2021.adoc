@@ -1,0 +1,36 @@
+= Protokoll Gruppe Campingplatzverwaltung
+
+Treffen am 3.06.2021
+
+Ort: Big Blue Button
+Beginn: 10:00 Uhr
+Ende: 11:00 Uhr
+
+__Schriftführer:__ Boleslav Glavatki
+
+*Nächstes Treffen:* +
+9.06.2021, 10:00 Uhr, Big Blue Button
+
+__Teilnehmer:__
+
+- Johannes Holzhauer
+- Kevin Schimpf
+- Timo Bundt
+- Florian Müller
+- Jakob Dunkel
+- Boleslav Glavatki
+
+== BEMERKUNG
+-
+
+== Retrospektive des letzten Sprints
+
+== Aktueller Stand
+-
+
+== Planung des nächsten Sprints
+- Filter nach Größe des Parkplatzes(Parkplatzfilter). Wenn ein Parkplatz aus einem Grund defekt ist, soll nur für Admin sichtbar sein. 
+- Kalender und Zeit Auswahl anpassen. Wenn die Daten sind in Warenkorb geht nicht mehr den gleichen Parkplatz im gleichen Zeitbereich auswählen. 
+- Vorschläge für alternative Parkplätze. Wenn man auf die Suche geht und ein Buchungszeitraum wählt, dann sieht man alle Verfügbare Plätze und kann sich ein auswählen oder anderen als Alternative. 
+- Filter nach Verfügbarkeit. 
+- Rechnungserstellung, vervollständigen(Formatierung, Steuer, Rabattpreis,....) ,auch für ausgeliehenen Extras.

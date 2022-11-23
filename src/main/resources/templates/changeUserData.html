@@ -1,0 +1,117 @@
+<div th:replace="fragments/head"></div>
+
+<div class="ui container">
+    <header>
+        <h1>Daten bearbeiten</h1>
+    </header>
+
+    <div>
+        <form class="ui form" onSubmit = "return checkPassword(this)" th:action="@{/userdata/change/}" method="post">
+            <label for="name">Vorname:</label>
+            <input pattern="[A-Za-z0-9]+" maxlength="30" class="form-control" type="text" id="firstname" name="firstname" th:value="${user.getFirstName()}" />
+            <br>
+            <label for="name">Nachname:</label>
+            <input pattern="[A-Za-z0-9]+" maxlength="30" class="form-control" type="text" id="lastname" name="lastname" th:value="${user.getLastName()}" />
+            <br>
+            <label for="name">Geburtsdatum:</label>
+            <input class="form-control" type="date" id="birthday" name="birthday" th:value="${user.getBirthDate()}" />
+            <br>
+            <label for="name">Straße und Hausnummer:</label>
+            <input class="form-control" type="text" id="street" name="street" th:value="${user.getStreet()}" />
+            <br>
+            <label for="name">Stadt:</label>
+            <input class="form-control" type="text" id="city" name="city" th:value="${user.getCity()}" />
+            <br>
+            <label for="name">PLZ:</label>
+            <input minlength ="5" maxlength="5" class="form-control" type="text" id="plz" name="plz" th:value="${user.getPlz()}" />
+            <br>
+            
+            <label for="oldPassword">Aktuelles Passwort</label>
+            <input class="form-control" th:placeholder="#{register.oldPassword}" name="oldPassword" type="password"/>          
+            <br>
+          
+            <label th:text="#{register.password}" for="password">Neues Passwort</label>
+            <input class="form-control" th:placeholder="#{register.password}" name="password" type="password"/>
+            <p th:if="${passwordError!= null}" th:text="${passwordError}">Das Passwort darf nicht leer sein.</p>
+          
+            <br>   
+
+            <label th:text="#{register.password_w}" for="password_w">Neues Passwort wiederholen</label>
+            <input class="form-control" th:placeholder="#{register.password_w}" name="password_w" type="password"/>
+            <br>
+            <div class="form-group row">
+                <label for="using2FA" class="col-sm-3" th:text="#{label.user.2fa}">Use Two Step Verification</label>
+                <span class="col-sm-5"><input id="using2FA" th:checked="${user.isUsing2FA()}" type="checkbox" name="using2FA" value="true"/></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-refresh" aria-hidden="true"></i><span th:text="'&nbsp; &nbsp;' + 'Aktualisieren'"> Werte aktualisieren </span>
+            </button>
+
+        </form>
+    </div>
+</div>
+<div th:replace="fragments/foot"></div>
+
+<script> 
+          
+    // Function to check Whether both passwords
+    // is same or not.
+    function checkPassword(form) {
+        password1 = form.password.value;
+        password2 = form.password_w.value;
+        passwordOld = form.oldPassword.value;
+        var birthday = +new Date(form.birthday.value);
+        var age = ((Date.now() - birthday) / (31557600000));
+        
+        if(form.firstname.value == ""){
+            alert ("Bitte Vornamen eingeben");
+            return false;
+        }
+        else if(form.lastname.value == ""){
+            alert ("Bitte Nachnamen eingeben");
+            return false;
+        }else if(form.street.value == ""){
+            alert ("Bitte Adresse eingeben");
+            return false;
+        }else if(form.city.value == ""){
+            alert ("Bitte Stadt eingeben");
+            return false;
+        }else if(form.plz.value == ""){
+            alert ("Bitte PLZ eingeben");
+            return false;
+        }else if(age < 18){
+            alert ("Sie müssen älter als 18 sein");
+
+            return false;
+        }
+        
+        else if(passwordOld != "" || password1 != "" || password2 != ""){
+        if (password1 == ''){
+            alert ("Bitte geben Sie ein neues Passwort ein");
+            return false;
+        }
+        else if (password2 == '') { 
+            alert ("Bitte bestätigen Sie ihr neues Passwort");
+            return false;
+        }
+        else if (passwordOld == ''){
+            alert ("Bitte geben Sie ihr altes Passwort ein");
+            return false;
+        }
+
+        else if (password1 != password2) {
+            alert ("\nDie Passwörter sind nicht gleich!")
+            return false;
+        }else if (passwordOld == password1) {
+            alert ("\nDas neue Passwort ist gleich dem alten Passwort")
+            return false;
+        }
+
+        else{
+            return true;
+        }}
+        
+
+    }
+</script>

@@ -1,0 +1,38 @@
+= Protokoll Gruppe Campingplatzverwaltung
+
+Treffen am 14.04.2021
+
+Ort:      Big Blue Button
+Beginn:   10:00 Uhr +
+Ende:     11:00 Uhr
+
+__Schriftführer:__ Florian Müller
+
+*Nächstes Treffen:* +
+21.04.2021, 10:00 Uhr, Big Blue Button
+
+__Teilnehmer:__
+
+- Sven Karol
+- Johannes Holzhauer
+- Kevin Schimpf
+- Timo Bundt
+- Florian Müller
+- Jakob Dunkel
+- Boleslav Glavatki
+
+== Bemerkungen
+-
+
+== Retrospektive des letzten Sprints
+
+Besprechung Git, UMLet, Gästebuch.
+
+== Aktueller Stand
+
+Einarbeitung ins Gästebuch. 
+
+== Planung des nächsten Sprints
+
+Weitere Einarbeitung in Gästebuchanwendung bzw. Vidoeshop. 
+

@@ -1,0 +1,64 @@
+<div th:replace="fragments/head"></div>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="row col-lg-10">
+                <div class="w-300 mw-550">
+                    <div class="card p-0">
+
+                        <div class="content">
+                            <a class="header" th:href="@{/extras/{id}(id=${extra.id})}" th:text="${extra.name}">Last
+                                Action
+                                Hero</a>
+                            <div class="image">
+                                <a th:href="@{/extras/{id}(id=${extra.id})}">
+                                    <img class="ui container" th:src="@{/resources/img/{image}(image=${extra.image})}"
+                                        width="290" height="200" src="../static/resources/img/ball.png" />
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="description" th:text="${{extra.getPriceRounded()}}">9.99 €</div>
+                            <label th:switch="${extra.isRequired()}" for="number">
+                                <span th:case="${false}"></span>
+                                <span th:case="${true}">Auf Dauercampingplatz benötigt!</span>
+                                <span th:case="*"></span>
+                            </label>
+                            <form class="ui form" th:action="@{/bookextra}" method="post">
+                                <input type="hidden" name="order" th:value="${order.id}" />
+                                <input type="hidden" name="extra" th:value="${extra.id}" />
+                                <div th:if="${extra.isReturnable()}">
+
+                                    <div th:if="${extra.getQuantity().getAmount()}>=1">
+                                        <select class="form-control" name="quantity" id="quantity">
+                                            <option
+                                                th:each="i : ${#numbers.sequence(1, {extra.getQuantity().getAmount()})}"
+                                                th:text="${i}" th:value="${i}" th:selected="${i==1}"></option>
+                                        </select>
+                                        <br />
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="icon check"></i><span th:text="Ausleihen"> Werte
+                                                aktualisieren</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div th:unless="${extra.isReturnable()}">
+                                    <div class="field">
+                                        <input class="form-control" id=" quantity" type="number" name="quantity" min="1"
+                                            max="64000" step="1" value="0" /><br />
+                                        
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="icon check"></i><span th:text="Buchen"> Werte aktualisieren</span>
+                                    </button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            <div th:replace="fragments/foot"></div>
+      

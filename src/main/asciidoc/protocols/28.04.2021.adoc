@@ -1,0 +1,33 @@
+= Protokoll Gruppe 2
+
+Treffen am 28.04.2021
+
+Ort:      Big Blue Button +
+Beginn:   10:00 Uhr +
+Ende:     11:00 Uhr
+
+__Schriftführer:__ Timo Bundt
+
+*Nächstes Treffen:* +
+05.05.2021, 10:00 Uhr, Big Blue Button
+
+__Teilnehmer:__
+- Sven Karol
+- Johannes Holzhauer
+- Kevin Schimpf
+- Timo Bundt
+- Florian Müller
+- Jakob Dunkel
+- Boleslav Glavatki
+
+== Bemerkungen
+-
+
+== Retrospektive des letzten Sprints
+Diagramme wurden angepasst
+
+== Aktueller Stand
+Besprechung des Pflichtenhefts
+
+== Planung des nächsten Sprints
+Anpassung des Pflichtenhefts

@@ -1,0 +1,28 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLGeneric</id><coordinates><x>0</x><y>230</y><w>100</w><h>290</h></coordinates><panel_attributes>Client
+halign=center
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>170</x><y>230</y><w>690</w><h>290</h></coordinates><panel_attributes>Server
+halign=center
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>80</x><y>310</y><w>130</w><h>70</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>110;50;10;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>10</x><y>300</y><w>80</w><h>40</h></coordinates><panel_attributes>HTML
+halign=center
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>10</x><y>420</y><w>80</w><h>40</h></coordinates><panel_attributes>CSS
+halign=center
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>190</x><y>350</y><w>80</w><h>40</h></coordinates><panel_attributes>Thymeleaf
+halign=center
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>480</x><y>290</y><w>80</w><h>70</h></coordinates><panel_attributes>Catalog
+halign=center
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>590</x><y>290</y><w>80</w><h>70</h></coordinates><panel_attributes>Orders
+halign=center
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>480</x><y>390</y><w>80</w><h>70</h></coordinates><panel_attributes>Customer
+halign=center
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>590</x><y>390</y><w>80</w><h>70</h></coordinates><panel_attributes>Inventory
+halign=center
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>300</x><y>290</y><w>140</w><h>170</h></coordinates><panel_attributes>Controller:
+-CatalogController
+-CustomerController
+-OrderController
+-InventoryController
+halign=center
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>260</y><w>430</w><h>230</h></coordinates><panel_attributes>lt=.
+Application Logic</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>80</x><y>370</y><w>130</w><h>90</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>110;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>260</x><y>360</y><w>60</w><h>30</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>40;10;10;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>750</x><y>340</y><w>80</w><h>70</h></coordinates><panel_attributes>H2 Database
+halign=center
+bg=white</panel_attributes><additional_attributes></additional_attributes></element></diagram>

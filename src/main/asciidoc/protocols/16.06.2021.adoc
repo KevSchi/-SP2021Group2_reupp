@@ -1,0 +1,33 @@
+= Protokoll Gruppe 2
+
+Treffen am 16.06.2021
+
+Ort:      Big Blue Button +
+Beginn:   10:00 Uhr +
+Ende:     11:00 Uhr
+
+__Schriftführer:__ Kevin Schimpf
+
+*Nächstes Treffen:* +
+23.06.06.2021, 10:00 Uhr, Big Blue Button
+
+__Teilnehmer:__
+- Sven Karol
+- Johannes Holzhauer
+- Kevin Schimpf
+- Timo Bundt
+- Florian Müller
+- Jakob Dunkel
+- Boleslav Glavatki
+
+== Bemerkungen
+- Statistiken sind weiterhin offen
+
+== Retrospektive des letzten Sprints
+Anpassungen an Musskriterien
+
+== Aktueller Stand
+Beinaheabschluss aller Musskriterien vorbereitung auf Crosstesting
+
+== Planung des nächsten Sprints
+Vorbereitung des Crosstestings

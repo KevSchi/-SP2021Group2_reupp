@@ -1,0 +1,35 @@
+= Protokoll Gruppe 2
+
+Treffen am 12.05.2021
+
+Ort:      Big Blue Button +
+Beginn:   10:00 Uhr +
+Ende:     11:00 Uhr
+
+__Schriftführer:__ Jakob Dunkel
+
+*Nächstes Treffen:* +
+19.05.2021, 10:00 Uhr, Big Blue Button
+
+__Teilnehmer:__
+
+- Sven Karol
+- Florian Müller
+- Timo Bundt
+- Boleslav Glavatki
+- Johannes Holzhauer
+- Kevin Schimpf
+- Jakob Dunkel
+
+== Bemerkungen
+-
+
+== Retrospektive des letzten Sprints
+- Beginn Entwurfsphase: Prototyp auf Basis des Pflichtenhefts erstellt
+
+== Aktueller Stand
+- Individuelle Prototypen in Bearbeitung
+
+== Planung des nächsten Sprints
+- Finalisierung des Prototypen +
+- Entwurfsdokumente anpassen

@@ -1,0 +1,310 @@
+<div th:replace="fragments/head"></div>
+
+<div class="ui container">
+    <header>
+        <h1 th:text="Buchungen">Buchungen</h1>
+    </header>
+    <form class="" method="get" th:action="@{/getOrders}">
+        <br>
+        Startdatum:
+        <input type="date" class="form-control" name="start" th:value="${#dates.createNow()}" />
+        <br>
+        Enddatum:
+        <input type="date" class="form-control" name="end" th:value="${#dates.createNow()}" />
+        <br>
+
+        <td>
+            Email:
+            <input type="field" name="name" />
+        </td>
+        <button id="knopf" type="submit" class="btn btn-primary">
+            <i class="add to cart icon"></i>
+            <span text="">Suchen</span>
+        </button>
+    </form>
+    <h2 th:text="#{orders.running}"></h2>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th th:text="#{orders.date}">Datum</th>
+                <th text="">Platz</th>
+                <th th:text="#{orders.customer}">Kunde</th>
+                <th text="">Begleitung</th>
+                <th th:text="Gebühr">Bezahlt</th>
+                <th th:text="Extras"></th>
+                <th text=""></th>
+                <th text=""></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${ordersRunning} ">
+                <td>
+                    <div th:text="bis"> </div>
+                    <div th:text="${#temporals.format(order.getEndDate(), 'dd-MM-yyyy')}"> </div>
+                <td>
+                    <div class="header" th:text="${order.getCampingSite()}">Last Action Hero</div>
+                </td>
+
+                </td>
+                <td th:text="${order.userAccount.id}"></td>
+                <td>
+                    <details th:unless="${#lists.isEmpty(order.getFamily().getOtherPeople())}">
+                        <summary>Familie</summary>
+                        <p th:each="person : ${order.getFamily().getOtherPeople()}" th:text="${person}"></p>
+                    </details>
+                </td>
+
+                <td>
+                    <div>Platz: <text th:text="${order.getCompleteCostsRounded()}"></text></div>
+                    <div>Extras: <text th:text="${order.getExtrasTotalRounded()}"> </div>
+                    <div>Gesamt: <text th:text="${order.getCompleteCostsDiscountedMoneyRounded()}"> </div>
+
+                </td>
+
+                <td>
+                    <block th:each="item : ${order.getExtras()} ">
+                        <div>
+                            <text th:text="${item.getQuantity()}"></text>
+                            <text th:text="${item.getName()}"></text>
+                            <text th:text="${item.getPriceRounded()}"></text>
+
+                            <div th:unless="${item.hasReturnedItem()}">
+                                <div th:if="${item.isReturnable()}">
+
+                                    <form class="ui form" th:action="@{/returnextra}" method="post">
+                                        <input type="hidden" name="id" th:value="${item.getId()}" />
+                                        <input type="hidden" name="order" th:value="${order.id}" />
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <form class="ui form" th:action="@{/deleteextra}" method="post">
+                                    <input type="hidden" name="id" th:value="${item.getId()}" />
+                                    <input type="hidden" name="order" th:value="${order.id}" />
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div th:unless="${item.isReturnable()}">
+                                <form class="ui form" th:action="@{/deleteextra}" method="post">
+                                    <input type="hidden" name="id" th:value="${item.getId()}" />
+                                    <input type="hidden" name="order" th:value="${order.id}" />
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </block>
+
+
+                    <a class="item" href="extras.html"
+                        th:href="@{/bookextras/{account}/{order} (account=${order.userAccount.id}, order=${order.id})}"
+                        sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" text="Hinzufügen">Hinzufügen</a>
+                </td>
+
+                <div th:if="${order.isEverythingReturned()}">
+                    <div th:if="${order.isRequiredBooked()}">
+                        <td>
+                            <form class="ui form" th:action="@{/checkout}" method="post">
+                                <input type="hidden" name="order" th:value="${order.id}" />
+                                <select name="paid" id="paid" required>
+                                    <option selected="selected" disabled="disabled" value="">Bitte Wählen</option>
+                                </select>
+                                <select name="payment" id="payment">
+
+                                </select>
+                                <button id="checkout" type="submit" class="ui labeled icon button">
+                                    <i class="icon check"></i><span th:text="Check-Out"> Werte aktualisieren</span>
+                                </button>
+                            </form>
+                        </td>
+                    </div>
+                </div>
+
+                <div th:unless="${order.isEverythingReturned()}">
+                    <th>Vor Checkout müssen alle Extras zurückgegeben worden sein</th>
+                </div>
+                <div th:unless="${order.isRequiredBooked()}">
+                    <th>Nicht alle notwendigen Artikel sind gebucht worden
+                        <div th:each="item : ${order.getMissing()}"><a th:text="${order.getMissingName(item)}"
+                                th:href="@{/bookextra/{order}/{id}(id=${order.getMissingID(item)}, order=${order.id})}"></a>
+                        </div>
+                    </th>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 th:text="#{orders.paid}"></h2>
+
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th th:text="#{orders.date}">Datum</th>
+                <th th:text="#{orders.customer}">Kunde</th>
+                <th th:text="#{orders.value}">Bezahlt</th>
+                <th text="">Von</th>
+                <th text="">Bis</th>
+                <th text="">Zahlungsweise</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${ordersPaid} ">
+                <th:block th:if="${order.isTimeStampOK()}">
+                    <td th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
+                    <td th:text="${order.userAccount.id}"></td>
+                    <td th:text="${order.getCompleteCostsDiscountedMoneyRounded()}"> </td>
+                    <td th:text="${#temporals.format(order.startDate, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${#temporals.format(order.endDate, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${order.getPayment()}"></td>
+                </th:block>
+                <th:block th:unless="${order.isTimeStampOK()}">
+                    <th:block th:if="${order.isTimeStampOK2()}">
+                        <td style="color: orange;" th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
+                        <td style="color: orange;" th:text="${order.userAccount.id}"></td>
+                        <td style="color: orange;" th:text="${order.getCompleteCostsDiscountedMoneyRounded()}"> </td>
+                        <td style="color: orange;" th:text="${#temporals.format(order.startDate, 'dd.MM.yyyy')}"></td>
+                        <td style="color: orange;" th:text="${#temporals.format(order.endDate, 'dd.MM.yyyy')}"></td>
+                        <td style="color: orange;" th:text="${order.getPayment()}"></td>
+                    </th:block>
+                </th:block>
+                <th:block th:unless="${order.isTimeStampOK2()}">
+                    <td style="color: red;" th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
+                    <td style="color: red;" th:text="${order.userAccount.id}"></td>
+                    <td style="color: red;" th:text="${order.getCompleteCostsDiscountedMoneyRounded()}"> </td>
+                    <td style="color: red;" th:text="${#temporals.format(order.startDate, 'dd.MM.yyyy')}"></td>
+                    <td style="color: red;" th:text="${#temporals.format(order.endDate, 'dd.MM.yyyy')}"></td>
+                    <td style="color: red;" th:text="${order.getPayment()}"></td>
+                </th:block>
+                <td>
+                    <form sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="ui form" th:action="@{/printInvoice}"
+                        method="get">
+                        <input type="hidden" name="order" th:value="${order.id}" />
+                        <button type="submit" class="ui labeled icon button">
+                            <i class="icon check"></i>
+                            <span th:text="Rechnung"> Werte aktualisieren</span>
+                        </button>
+                    </form>
+
+
+                <td>
+                    <form sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="ui form" th:action="@{/paid}"
+                        method="post">
+                        <input type="hidden" name="order" th:value="${order.id}" />
+
+                        <button type="submit" class="ui labeled icon button">
+                            <i class="icon check"></i>
+                            <span th:text="Abschließen"> Werte aktualisieren</span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 th:text="#{orders.completed}"></h2>
+
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th th:text="#{orders.date}">Datum</th>
+                <th th:text="#{orders.customer}">Kunde</th>
+                <th th:text="#{orders.payed}">Bezahlt</th>
+                <th text="">Von</th>
+                <th text="">Bis</th>
+                <th text="">Zahlungsweise</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${ordersCompleted} ">
+                <td th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
+                <td th:text="${order.userAccount.id}"></td>
+                <td th:text="${order.getCompleteCostsDiscountedMoneyRounded()}"> </td>
+                <td th:text="${#temporals.format(order.startDate, 'dd.MM.yyyy')}"></td>
+                <td th:text="${#temporals.format(order.endDate, 'dd.MM.yyyy')}"></td>
+                <td th:text="${order.getPayment()}"></td>
+                <td>
+                    <form sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="ui form" th:action="@{/printInvoice}"
+                        method="get">
+                        <input type="hidden" name="order" th:value="${order.id}" />
+                        <button type="submit" class="ui labeled icon button">
+                            <i class="icon check"></i>
+                            <span th:text="Rechnung"> Werte aktualisieren</span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 th:text="#{orders.cancelled}"></h2>
+
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th th:text="#{orders.date}">Datum</th>
+                <th th:text="#{orders.customer}">Kunde</th>
+                <th text="">Wert</th>
+                <th text="">Von</th>
+                <th text="">Bis</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${ordersCancelled} ">
+                <td th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
+                <td th:text="${order.userAccount.id}"></td>
+                <td th:text="${order.getCompleteCostsDiscountedMoneyRounded()}"> </td>
+                <td th:text="${#temporals.format(order.startDate, 'dd.MM.yyyy')}"></td>
+                <td th:text="${#temporals.format(order.endDate, 'dd.MM.yyyy')}"></td>
+                <td th:text="${order.getReason()}"></td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/foot"></div>
+
+<script>
+    var mList = {
+        Bezahlt: ['Bar', 'EC-Karte', 'Kreditkarte'],
+        Nicht_Bezahlt: ['Überweisung', 'Bar']
+
+    };
+
+
+var mList = {
+        Bezahlt: ['Bar', 'EC-Karte', 'Kreditkarte'],
+        Nicht_Bezahlt: ['Überweisung', 'Bar']
+
+    };
+
+
+    var el_parent = document.querySelectorAll("#paid"); //parent select element
+    var el_child = document.querySelectorAll("#payment"); //child select element
+
+    //add event listener to parent select, so that when user selects an option, child gets populated
+    el_parent.forEach((el,index) => {
+        for (key in mList) { //populate the parent select element with array key
+            el.innerHTML = el.innerHTML + '<option>' + key + '</option>';
+        }
+        el.addEventListener('change', function populate_child(e) {
+            el_child[index].innerHTML = '';
+            itm = e.target.value;
+            if (itm in mList) {
+                for (i = 0; i < mList[itm].length; i++) {
+                    el_child[index].innerHTML = el_child[index].innerHTML + '<option>' + mList[itm][i] + '</option>';
+                }
+            }
+        });
+    });
+</script>

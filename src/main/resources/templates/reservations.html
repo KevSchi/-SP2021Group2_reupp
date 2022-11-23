@@ -1,0 +1,187 @@
+<div th:replace="fragments/head"></div>
+<br>
+<header>
+    <h1 class="w-600 mw-600 m-auto text-center" th:text="#{reservations.title}">Bestellungen</h1>
+</header>
+<br>
+
+<form class="ui container" method="get" th:action="@{/getReservations}">
+    <br>
+    Startdatum:
+    <input type="date" class="form-control" name="start" th:value="${#dates.createNow()}" />
+    <br>
+    Enddatum:
+    <input type="date" class="form-control" name="end" th:value="${#dates.createNow()}" />
+    <br>
+
+    <td>
+        Email:
+        <input type="field" name="name" />
+    </td>
+    <button id="knopf" type="submit" class="btn btn-primary">
+        <i class="add to cart icon"></i>
+        <span text="">Suchen</span>
+    </button>
+</form>
+<div th:if="${reservationCatalog.size()>0}">
+
+
+    <h2 style="text-align:center" th:text="${header1}"></h2>
+    <table class="table w-600 mw-600 m-auto">
+        <tr>
+            <th text="">Kunde</th>
+            <th text="">Platz</th>
+            <th text="">Anfang</th>
+            <th text="">Ende</th>
+            <th text="">Dauer</th>
+            <th text="">Kosten/Tag</th>
+            <th text="">Kosten Gesamt</th>
+            <th text=""></th>
+            <th text=""></th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <div th:each="order : ${reservationCatalog}">
+                <tr>
+                    <td>
+                        <div class="header" th:text="${order.getName()}"></div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${order.getCampSite()}"></div>
+                    </td>
+                    <td>
+                        <div th:text="${#temporals.format(order.getStartDate(), 'dd.MM.yyyy')}"> </div>
+                    </td>
+                    <td>
+                        <div th:text="${#temporals.format(order.getEndDate(), 'dd.MM.yyyy')}"> </div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${order.getDuration()}"></div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${order.getPriceRounded()}"></div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${order.getCompleteCostsRounded()}"></div>
+                    </td>
+
+
+                    <td>
+                        <form th:if="${order.isReservationOK()}" th:action="@{/addFamily/{id}(id=${order.id})}" method="get">
+                            <input type="hidden" name="pid" th:value="${order.id}" />
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-check" aria-hidden="true"></i><span th:text="Checkin"> Werte
+                                    aktualisieren</span>
+                            </button>
+                        </form>
+
+                        <form th:if="${!order.isReservationOK()}" th:action="@{/addFamily/{id}(id=${order.id})}" method="get">
+                            <input type="hidden" name="pid" th:value="${order.id}" />
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i><span th:text="Checkin"> Werte
+                                    aktualisieren</span>
+                            </button>
+                            <small th:text="${order.getStart()}"></small>
+                            <small th:text="${order.getEnd()}"></small>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/cancel}" method="post">
+                            <input type="hidden" name="order" th:value="${order.id}" />
+                            <input type="hidden" name="pid" th:value="${order.id}" />
+                            <input type="text" name="reason" th:value="Grund" />
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i><span th:text="Stornieren"> Werte
+                                    aktualisieren</span>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </div>
+            </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${futureReservations.size()>0}">
+    <h2 style="text-align:center" th:text="${header2}"></h2>
+    <table class="table w-600 mw-600 m-auto">
+        <tr>
+            <th text="">Kunde</th>
+            <th text="">Platz</th>
+            <th text="">Anfang</th>
+            <th text="">Ende</th>
+            <th text="">Dauer</th>
+            <th text="">Kosten/Tag</th>
+            <th text="">Kosten Gesamt</th>
+            <th text=""></th>
+            <th text=""></th>
+        </tr>
+        </thead>
+        <tbody>
+            <div th:each="order : ${futureReservations}">
+                <tr>
+                    <td>
+                        <div class="header" th:text="${order.getName()}">Last Action Hero</div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${order.getCampSite()}">Last Action Hero</div>
+                    </td>
+                    <td>
+                        <div th:text="${#temporals.format(order.getStartDate(), 'dd.MM.yyyy')}"> </div>
+                    </td>
+                    <td>
+                        <div th:text="${#temporals.format(order.getEndDate(), 'dd.MM.yyyy')}"> </div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${order.getDuration()}">Last Action Hero</div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${order.getPriceRounded()}">Last Action Hero</div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${order.getCompleteCostsRounded()}">Last Action Hero</div>
+                    </td>
+
+
+                    <td>
+                        <form th:if="${order.isReservationOK()}" th:action="@{/addFamily/{id}(id=${order.id})}" method="get">
+                            <input type="hidden" name="pid" th:value="${order.id}" />
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-check" aria-hidden="true"></i><span th:text="Checkin"> Werte
+                                    aktualisieren</span>
+                            </button>
+                        </form>
+
+                        <form th:unless="${order.isReservationOK()}" th:action="@{/addFamily/{id}(id=${order.id})}" method="get">
+                            <input type="hidden" name="pid" th:value="${order.id}" />
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i><span th:text="Checkin"> Werte
+                                    aktualisieren</span>
+                            </button>
+                            <small th:text="${order.getStart()}"></small>
+                            <small th:text="${order.getEnd()}"></small>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/cancel}" method="post">
+                            <input type="hidden" name="order" th:value="${order.id}" />
+                            <input type="hidden" name="pid" th:value="${order.id}" />
+                            <input type="text" name="reason" th:value="Grund" />
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i><span th:text="Stornieren"> Werte
+                                    aktualisieren</span>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </div>
+            </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="fragments/foot"></div>

@@ -1,0 +1,251 @@
+<div th:replace="fragments/head"></div>
+<img th:src="@{/resources/img/top.jpg}" src="../static/resources/img/top.jpg" class="img-fluid rounded-top"
+    alt="placeholder">
+<div class="ui container">
+    <a class="content-title" th:text="#{${title}}" th:href="@{/}">
+        title
+    </a>
+    <form method="get" th:action="@{/getByDate}" class="d-flex align-content-start flex-wrap ">
+        <script th:inline="javascript">
+            var campsite = [[${ dates }]] || [];
+        </script>
+        <div th:replace="fragments/calendar"></div>
+
+        <input style="display: none" id="startDate" type="date" class="form-control" name="start"
+            th:value="${#dates.createNow()}" />
+        <input style="display: none" id="endDate" type="date" class="form-control" name="end"
+            th:value="${#dates.createNow()}" />
+
+        <div class="w-400 mw-full m-15">
+            <div class="form-group">
+                <select name="size" id="size" class="form-control">
+                    <option th:value="NOT_SELECTED" selected="selected" disabled="disabled">Wählen Sie eine
+                        Platzgröße</option>
+                    <option th:value="ALL" th:text="egal"></option>
+                    <option th:value="SMALL" th:text="klein"></option>
+                    <option th:value="'MEDIUM'" th:text="mittel"></option>
+                    <option th:value="'LARGE'" th:text="groß"></option>
+                </select>
+            </div>
+            <div class="form-group">
+
+                <select name="parking" id="parking" class="form-control">
+                    <option th:value="'ALL'" selected="selected" disabled="disabled">Wählen Sie einen Stellplatz
+                    </option>
+                    <option th:value="ALL" th:text="egal"></option>
+                    <option th:value="NO" th:text="keiner"></option>
+                    <option th:value="'BIKE'" th:text="Fahrrad"></option>
+                    <option th:value="'CAR'" th:text="Auto"></option>
+                    <option th:value="'TRAILER'" th:text="Campingwagen"></option>
+                </select>
+            </div>
+            <div class="custom-checkbox">
+                <input type="checkbox" name="permacamper" id="permacamper" th:checked="${permacamper}">
+                <label class="content-title" for="permacamper">Dauercampingplatz</label>
+            </div>
+
+            <input id="knopf" class="btn btn-primary mt-15" type="submit" value="Suchen">
+        </div>
+
+    </form>
+</div>
+<div th:each="message : ${message}">
+    <h1 th:text="${message}"></h1>
+</div>
+<div class="ui container">
+    <div class="row">
+        <div class="row col-lg-10">
+            <div th:each="campsite : ${campsiteCatalog}">
+                <div class="w-250 mw-350">
+                    <div class="card p-0">
+                        <img th:src="@{/resources/img/campsite.jpg}" src="../static/resources/img/campsite.jpg"
+                            class="img-fluid rounded-top" alt="placeholder">
+                        <div class="content">
+                            <h2 class="content-title">
+                                <a class="header" th:href="@{/campsite/{id}(id=${campsite.id})}"
+                                    th:text="${campsite.name}">Last Action Hero</a>
+
+
+                            </h2>
+                            <div class="text-muted">
+                                <div class="description" th:text="${{campsite.getPriceRounded()}}">9.99 €</div>
+                                <th:block th:switch="${#strings.toString(campsite.parkingSpace)}">
+                                    <div th:case="'NO'">Kein Stellplatz</div>
+                                    <div th:case="'BIKE'">Fahrradstellplatz</div>
+                                    <div th:case="'CAR'">Autostellplatz</div>
+                                    <div th:case="'TRAILER'">Wohnmobilstellplatz</div>
+                                </th:block>
+                                <th:block th:switch="${#strings.toString(campsite.getSize())}">
+                                    <div th:case="'SMALL'">Kleiner Platz </div>
+                                    <div th:case="'MEDIUM'">Mittelgroßer Platz</div>
+                                    <div th:case="'LARGE'">Großer Platz</div>
+                                </th:block>
+                                <th:block th:switch="${#strings.toString(campsite.permaCamper)}">
+                                    <div th:case="'PERMACAMPER'">Dauercampingplatz </div>
+                                    <div th:case="'NOT_PERMACAMPER'"></div>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:if="${message != ''}">Freie Plätze mit gleicher Parkplatzgröße</div>
+    <div th:each="campsite : ${sameParking}">
+        <div class="w-250 mw-350">
+            <div class="card p-0">
+                <img th:src="@{/resources/img/campsite.jpg}" src="../static/resources/img/campsite.jpg"
+                    class="img-fluid rounded-top" alt="placeholder">
+                <div class="content">
+                    <h2 class="content-title">
+                        <a class="header" th:href="@{/campsite/{id}(id=${campsite.id})}" th:text="${campsite.name}">Last
+                            Action Hero</a>
+
+
+                    </h2>
+                    <div class="text-muted">
+                        <div class="description" th:text="${{campsite.getPriceRounded()}}">9.99 €</div>
+                        <th:block th:switch="${#strings.toString(campsite.parkingSpace)}">
+                            <div th:case="'NO'">Kein Stellplatz</div>
+                            <div th:case="'BIKE'">Fahrradstellplatz</div>
+                            <div th:case="'CAR'">Autostellplatz</div>
+                            <div th:case="'TRAILER'">Wohnmobilstellplatz</div>
+                        </th:block>
+                        <th:block th:switch="${#strings.toString(campsite.getSize())}">
+                            <div th:case="'SMALL'">Kleiner Platz </div>
+                            <div th:case="'MEDIUM'">Mittelgroßer Platz</div>
+                            <div th:case="'LARGE'">Großer Platz</div>
+                        </th:block>
+                        <th:block th:switch="${#strings.toString(campsite.permaCamper)}">
+                            <div th:case="'PERMACAMPER'">Dauercampingplatz </div>
+                            <div th:case="'NOT_PERMACAMPER'"></div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:if="${message != ''}">Freie Plätze mit gleicher Größe</div>
+    <div th:each="campsite : ${sameSize}">
+        <div class="w-250 mw-350">
+            <div class="card p-0">
+                <img th:src="@{/resources/img/campsite.jpg}" src="../static/resources/img/campsite.jpg"
+                    class="img-fluid rounded-top" alt="placeholder">
+                <div class="content">
+                    <h2 class="content-title">
+                        <a class="header" th:href="@{/campsite/{id}(id=${campsite.id})}" th:text="${campsite.name}">Last
+                            Action Hero</a>
+
+
+                    </h2>
+                    <div class="text-muted">
+                        <div class="description" th:text="${{campsite.getPriceRounded()}}">9.99 €</div>
+                        <th:block th:switch="${#strings.toString(campsite.parkingSpace)}">
+                            <div th:case="'NO'">Kein Stellplatz</div>
+                            <div th:case="'BIKE'">Fahrradstellplatz</div>
+                            <div th:case="'CAR'">Autostellplatz</div>
+                            <div th:case="'TRAILER'">Wohnmobilstellplatz</div>
+                        </th:block>
+                        <th:block th:switch="${#strings.toString(campsite.getSize())}">
+                            <div th:case="'SMALL'">Kleiner Platz </div>
+                            <div th:case="'MEDIUM'">Mittelgroßer Platz</div>
+                            <div th:case="'LARGE'">Großer Platz</div>
+                        </th:block>
+                        <th:block th:switch="${#strings.toString(campsite.permaCamper)}">
+                            <div th:case="'PERMACAMPER'">Dauercampingplatz </div>
+                            <div th:case="'NOT_PERMACAMPER'"></div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="col-lg-2">
+            <div class="content">
+                <form id="sort-campsites-form" class="w-400 mw-full ">
+                    <div class="form-group justify-content-center">
+                        <label for="size">Platzgröße</label>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="small-checkbox" name="small" value="" checked="checked">
+                                <label for="small-checkbox">kleim</label>
+                            </div>
+                        </div>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="medium-checkbox" name="meduim" value="" checked="checked">
+                                <label for="medium-checkbox">mittel</label>
+                            </div>
+                        </div>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="large-checkbox" name="large" value="" checked="checked">
+                                <label for="large-checkbox">groß</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="parkingSpace">Parkplatztyp</label>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="bike-checkbox" name="bike" value="" checked="checked">
+                                <label for="bike-checkbox">Motorrad</label>
+                            </div>
+                        </div>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="car-checkbox" name="car" value="" checked="checked">
+                                <label for="car-checkbox">Auto</label>
+                            </div>
+                        </div>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="trailer-checkbox" name="trailer" value="" checked="checked">
+                                <label for="trailer-checkbox">Trailer</label>
+                            </div>
+                        </div>
+                    </div>
+                    <input class="btn btn-primary btn-block" type="submit" value="SUBMIT">
+                </form>
+            </div>
+        </div> -->
+
+
+<div sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" id="test" class="ui link cards" th:remove="all-but-first">
+    <div class="ui container">
+        <form class="ui form" th:action="@{/addCampsite}" method="get">
+            <td><button type="submit" class="btn btn-primary">
+                    <i class="fa fa-plus"></i><span th:text="'&nbsp; &nbsp;' + 'Platz erstellen'"> Platz erstellen
+                    </span>
+                </button></td>
+        </form>
+    </div>
+</div>
+<br>
+
+<div sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" id="test" class="ui link cards" th:remove="all-but-first">
+    <div class="ui container">
+        <form class="ui form" th:action="@{/hiddenCampsites}" method="get">
+            <td><button type="submit" class="btn btn-primary">
+                    <i class="fa fa-eye-slash"></i><span th:text="'&nbsp; &nbsp;' + 'Versteckte Plätze'"> Versteckte
+                        Plätze </span>
+                </button></td>
+        </form>
+    </div>
+</div>
+
+<!-- <script type="text/javascript">
+    const form = document.getElementById("sort-campsites-form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(form.small.checked);
+    })
+</script> -->
+
+<img class="img-fluid rounded-top" th:src="@{/resources/img/foot1.jpg}" src="../static/resources/img/foot1.jpg">
+<div th:replace="fragments/foot"></div>

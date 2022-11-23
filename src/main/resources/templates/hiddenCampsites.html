@@ -1,0 +1,114 @@
+<div th:replace="fragments/head"></div>
+<img th:src="@{/resources/img/top.jpg}" src="../static/resources/img/top.jpg"
+class="img-fluid rounded-top" alt="placeholder">
+<div class="ui container">
+    <h2 class="content-title" th:text="#{${title}}">
+        title
+    </h2>
+   
+</div>
+<div class="ui container">
+    <div class="row">
+        <div class="row col-lg-10">
+            <div th:each="campsite : ${campsiteCatalog}">
+                <div class="w-250 mw-350">
+                    <div class="card p-0">
+                        <img th:src="@{/resources/img/campsite.jpg}" src="../static/resources/img/campsite.jpg"
+                            class="img-fluid rounded-top" alt="placeholder">
+                        <div class="content">
+                            <h2 class="content-title">
+                                <a sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="header"
+                                    th:href="@{/changeCampsite/{id}(id=${campsite.id})}"
+                                    th:text="${campsite.name}">
+                                </a>
+                            </h2>
+                            <div class="text-muted">
+                                <div class="description" th:text="${{campsite.price}}">9.99 €</div>
+                                <div th:text="${campsite.parkingSpace}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-lg-2">
+            <div class="content">
+                <form id="sort-campsites-form" class="w-400 mw-full ">
+                    <div class="form-group justify-content-center">
+                        <label for="size">Platzgröße</label>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="small-checkbox" name="small" value="" checked="checked">
+                                <label for="small-checkbox">kleim</label>
+                            </div>
+                        </div>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="medium-checkbox" name="meduim" value="" checked="checked">
+                                <label for="medium-checkbox">mittel</label>
+                            </div>
+                        </div>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="large-checkbox" name="large" value="" checked="checked">
+                                <label for="large-checkbox">groß</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="parkingSpace">Parkplatztyp</label>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="bike-checkbox" name="bike" value="" checked="checked">
+                                <label for="bike-checkbox">Motorrad</label>
+                            </div>
+                        </div>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="car-checkbox" name="car" value="" checked="checked">
+                                <label for="car-checkbox">Auto</label>
+                            </div>
+                        </div>
+                        <div class="custom-control m-5">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="trailer-checkbox" name="trailer" value="" checked="checked">
+                                <label for="trailer-checkbox">Trailer</label>
+                            </div>
+                        </div>
+                    </div>
+                    <input class="btn btn-primary btn-block" type="submit" value="SUBMIT">
+                </form>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<div sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" id="test" class="ui link cards" th:remove="all-but-first">
+    <div class="ui container">
+        <form class="ui form" th:action="@{/addCampsite}" method="get">
+            <td><button type="submit" class="btn btn-primary">
+                <i class="fa fa-plus"></i><span th:text="'&nbsp; &nbsp;' + 'Platz erstellen'"> Platz erstellen </span>
+            </button></td>
+        </form>
+    </div>
+</div>
+<br>
+<div sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" id="test" class="ui link cards" th:remove="all-but-first">
+    <div class="ui container">
+        <form class="ui form" th:action="@{/campsiteCatalog}" method="get">
+            <td><button type="submit" class="btn btn-primary">
+                <i class="fa fa-eye"></i><span th:text="'&nbsp; &nbsp;' + 'Sichtbare Plätze'"> Sichtbare Plätze </span>
+            </button></td>
+        </form>
+    </div>
+</div>
+
+<!-- <script type="text/javascript">
+    const form = document.getElementById("sort-campsites-form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(form.small.checked);
+    })
+</script> -->
+<img th:src="@{/resources/img/foot1.jpg}" src="../static/resources/img/foot1.jpg" class="img-fluid rounded-top">
+<div th:replace="fragments/foot"></div>

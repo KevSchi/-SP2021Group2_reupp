@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="#{orders.title}">Bestellungen</title>
+</head>
+<body>
+<div class="ui container">
+    <header>
+        <h1 th:text="#{orders.title}">Bestellungen</h1>
+    </header>
+    <nav th:include="navigation :: navigation"></nav>
+
+    
+    <h2 th:text="#{orders.running}"></h2>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th th:text="#{orders.date}">Datum</th>
+            <th th:text="#{orders.customer}">Kunde</th>
+            <th th:text="Platzgebühr">Bezahlt</th>
+            <th th:text="Leihgegenstände"></th>
+            <th text=""></th>
+        </tr>
+        </thead>
+        <tbody>
+                  
+                                            
+                <tr th:each="order : ${ordersRunning} ">
+                    <td>
+                        <!-- Abreisedaten verknüpfen -->
+                        <div th:text="bis"> </div>
+                        <div th:text="${#temporals.format(order.getEndDate(), 'dd-MM-yyyy')}"> </div>
+                    </td>
+                    <td th:text="${order.userAccount.id}"></td>
+                    <td th:text="${order.getPrice()}"> </td>
+                        
+                    <td>                  
+                        <block th:each="item : ${order.getExtrasList()} ">
+                            <div th:text="${item}"></div>
+                     
+                        </block>
+                        <div th:text="${order.getExtrasTotal()}"> </div>
+                        <a class="item" href="extras.html" th:href="@{/bookextras/{account}/{order} (account=${order.userAccount.id}, order=${order.id})}" sec:authorize="hasAnyRole('BOSS','EMPLOYEE')"
+                        text="Hinzufügen">Hinzufügen</a>
+                   </td>
+
+                   <form class="ui form" th:action="@{/test}" method="post">
+                    <input type="hidden" name="order" th:value="${order.id}"/>
+                    <button type="submit" class="ui labeled icon button">
+                        <i class="icon check"></i><span th:text="test"> Werte aktualisieren</span>
+                    </button>
+                 
+                </form></td>
+                  
+                   
+               
+                    <td>
+                    <form class="ui form" th:action="@{/checkin}" method="post">
+                        <input type="hidden" name="order" th:value="${order.id}"/>
+                        <select name="paid" id="paid">
+                            <option th:value="TRUE" th:text="Bezahlt"></option>
+                            <option th:value="'FALSE'" th:text="Nicht_Bezahlt"></option>
+                        </select>
+                        <button type="submit" class="ui labeled icon button">
+                            <i class="icon check"></i><span th:text="Check-Out"> Werte aktualisieren</span>
+                        </button>
+                     
+                    </form></td>
+                    
+                    
+            
+                </tr>
+        </tbody>
+    </table>
+
+
+
+    <h2 th:text="#{orders.paid}"></h2>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th th:text="#{orders.date}">Datum</th>
+            <th th:text="#{orders.customer}">Kunde</th>
+            <th th:text="#{orders.value}">Bezahlt</th>
+            <th text=""></th>
+        </tr>
+        </thead>
+        <tbody>
+                  
+                                            
+                <tr th:each="order : ${ordersPaid} ">
+                    <td th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
+                    <td th:text="${order.userAccount.id}"></td>
+                    <td th:text="${order.total}"></td>
+                    <!-- <td th:text="${#temporals.format(order.startDate, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${#temporals.format(order.endDate, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${order.duration}"> </td> -->
+
+                    
+                    <!-- <td> <div th:each="val, stat : *{order.orderLines}">
+                        <p th:text="${stat.current.productName}"></p>
+                    </div> </td> -->
+
+                    <td>
+                        <form sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="ui form" th:action="@{/paid}" method="post">
+                            <input type="hidden" name="order" th:value="${order.id}"/>
+                          
+                            <button type="submit" class="ui labeled icon button">
+                                <i class="icon check"></i><span th:text="Abschließen"> Werte aktualisieren</span>
+                            </button>
+                        </form></td>
+                  
+                </tr>
+        </tbody>
+    </table>
+
+
+
+    <h2 th:text="#{orders.completed}"></h2>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th th:text="#{orders.date}">Datum</th>
+            <th th:text="#{orders.customer}">Kunde</th>
+            <th th:text="#{orders.payed}">Bezahlt</th>
+        </tr>
+        </thead>
+        <tbody>
+                  
+                                            
+                <tr th:each="order : ${ordersCompleted} ">
+                    <td th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
+                    <td th:text="${order.userAccount.id}"></td>
+                    <td th:text="${order.total}"></td>
+                
+                
+                </tr>
+        </tbody>
+    </table>
+
+    <h2 th:text="#{orders.cancelled}"></h2>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th th:text="#{orders.date}">Datum</th>
+            <th th:text="#{orders.customer}">Kunde</th>
+            <th th:text="#{orders.payed}">Wert</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+                  
+                                            
+                <tr th:each="order : ${ordersCancelled} ">
+                    <td th:text="${#temporals.format(order.dateCreated, 'dd.MM.yyyy HH:mm')}"></td>
+                    <td th:text="${order.userAccount.id}"></td>
+                    <td th:text="${order.total}"></td>
+                    <td> <div th:each="val, stat : *{order.orderLines}">
+                        <p th:text="${stat.current.productName}"></p>
+                    </div> </td>
+                </tr>
+        </tbody>
+    </table>
+
+
+</div>
+</body>
+</html>

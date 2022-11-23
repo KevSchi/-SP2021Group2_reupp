@@ -1,0 +1,18 @@
+<div th:replace="fragments/head"></div>
+
+<div class="ui container">
+    <header>
+        <h1 th:text="Titel">Last Action Hero</h1>
+    </header>
+    <h1 th:text="#{resetPassword.message}">reset</h1>
+
+    <label th:text="#{resetPassword.email}">email</label>
+    <form class="ui form" th:action="@{/forgot-password}" method="post">
+        <input class="form-control" id="name" name="name" type="text" value="" />
+        <button type="submit" class="btn btn-primary">
+            <i class="icon check"></i><span th:text="Ok"> Werte aktualisieren</span>
+        </button>
+    </form>
+</div>
+<div th:replace="fragments/foot"></div>
+

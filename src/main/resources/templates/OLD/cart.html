@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <script src="../static/resources/js/script.js" type="text/javascript"></script>
+
+    
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="#{cart.title}">Warenkorb</title>
+</head>
+<body>
+<div class="ui container">
+    <header>
+        <h1 th:text="#{cart.title}">Warenkorb</h1>
+    </header>
+    <nav th:include="navigation :: navigation"></nav>
+
+
+    <div id="center" th:unless="${cart.empty}">
+           
+        
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th th:text="Platz">Titel</th>
+              
+            
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+
+            <tr th:each="item : ${cart} ">
+                <td> 
+                    <div class ="cart-info">
+                    <img class="thumbnail" th:src="@{/resources/img/cover/{image}.jpg(image=${item.product.getImage()})}"
+                    src="../static/resources/img/cover/lac.jpg"/>
+                    <div>
+                        
+                        <p th:text="${item.productName}"></p> 
+                        <p th:text="${item.product.parkingSpace}"></p> 
+                        <p th:text="${item.productName}"></p> 
+                        <!-- <p><small>Vom: </small><small th:text="${item.product.startDate}"></small> </p> 
+                        <p><small>Bis zum: </small><small th:text="${item.product.endDate}"></small></p>  -->
+                        <small>Preis: </small>  <small th:text="${{item.price}}"> 10 Euro</small>
+                        <br>
+                        
+                        <form class="ui form" th:action="@{/remove}" method="post">
+                            <input type="hidden" name="identifier"th:value="${item.id}"/>
+                            
+                          <button type="submit" class="ui labeled icon button">
+                                <i class="icon edit"></i><span th:text="#{cart.delete}"> Werte aktualisieren</span>
+                            </button>
+                        </form>
+
+                        
+                    </div>
+                </div>
+                </td>
+    
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="ui two column centered grid">
+            <div class="four column centered row">
+                <div class="column">
+                    <div class="ui horizontal statistic">
+                        <div class="label" th:text="#{cart.total}">Summe</div>
+                        <div class="value"></div><span th:text="${{cart.price}}">1337</span></div>
+                    </div>
+               
+                <div class="column">
+                    
+                    <form sec:authorize="hasRole('CUSTOMER')" class="ui form" method="post" th:action="@{/reserve}">
+                        <button type="submit" class="ui button" th:text="#{cart.reserve}">Reservieren</button>
+                    </form>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <h2 id="leer" th:if="${cart.empty}" th:text="#{cart.empty}">Leer</h2>
+</div>
+
+</body>
+</html>

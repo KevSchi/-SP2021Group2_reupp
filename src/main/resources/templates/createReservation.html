@@ -1,0 +1,125 @@
+<div th:replace="fragments/head"></div>
+
+<div class="container-fluid">
+
+    <form class="w-400 mw-400 m-auto" onsubmit="return userexists()" method="post" role="form" id="form" th:action="@{/registerCustomer}"
+        th:object=" ${registrationForm}">
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+          </div>
+        
+        <header>
+            <h1 th:text="#{register.title}">Registrierung</h1>
+        </header>
+         <div class="form-text" th:if="${#fields.hasErrors('*')}">
+            <p>Einige Angaben sind nicht korrekt.</p>
+        </div>
+
+        <div class="form-group">
+            <label for="firstName" class="required"> Vorname</label>
+            <input class="form-control" th:placeholder="#{register.firstName}" name="firstName" th:field="*{firstName}" th:errorclass="fieldError" type="text" required="required"/>
+            <div class="ui negative message" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                <p>Der Vorname darf nicht leer sein.</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName" class="required">Nachname</label>
+            <input class="form-control" th:placeholder="#{register.lastName}" name="lastName" th:field="*{lastName}" th:errorclass="fieldError" type="text" required="required"/>
+            <div class="form-text" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+                <p>Der Nachname darf nicht leer sein.</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label th:text="#{register.mail}" for="mail" class="required">E-Mail</label>
+            <input onchange="userexists()" class="form-control" th:placeholder="#{register.mail}" name="mail" th:field="*{mail}" th:errorclass="fieldError" type="email" required="required"/>
+            <p class="form-text" th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}">Die Adresse darf nicht leer sein.</p>
+        </div>
+
+        <div class="form-group">
+            <label  th:text="#{register.birthDate}" for="birthDate" class="required">Geburtsdatum</label>
+            <input class="form-control" th:value="${#dates.createNow()}" th:field="*{birthDate}"  th:placeholder="#{register.birthDate}" name="birthDate" type="date" required="required"/>
+            <p class="form-text" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Das Geburtsdatum darf nicht leer sein.</p>
+        </div>
+
+        <div class="form-group">
+            <label th:text="#{register.street}" for="street" class="required">Straße und Hausnummer</label>
+            <input class="form-control" th:placeholder="#{register.street}" name="street" th:field="*{street}" th:errorclass="fieldError" type="street" required="required"/>
+            <p class="form-text" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Die Straße darf nicht leer sein.</p>
+        </div>
+
+        <div class="form-group">
+            <label th:text="#{register.city}" for="city" class="required">Stadt</label>
+            <input class="form-control" th:placeholder="#{register.city}" name="city" th:field="*{city}" th:errorclass="fieldError" type="city" required="required"/>
+            <p class="form-text" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Die Stadt darf nicht leer sein.</p>
+        </div>
+
+        <div class="form-group">
+            <label th:number="#{register.plz}" for="plz" class="required">PLZ</label>
+            <input class="form-control" th:placeholder="#{register.plz}" name="plz" th:field="*{plz}" th:errorclass="fieldError" type="plz" required="required"/>
+            <p class="form-text" th:if="${#fields.hasErrors('plz')}" th:errors="*{plz}">Die Postleitzahl darf nicht leer sein.</p>
+        </div>
+
+        <div class="form-group">
+            <label th:text="#{register.password}" for="password" class="required">Passwort</label>
+            <input class="form-control" th:placeholder="#{register.password}" name="password" th:field="*{password}" th:errorclass="fieldError" type="password" required="required"/>          
+            <p class="form-text" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Das Passwort darf nicht leer sein.</p>
+        </div>
+    
+        <div class="form-group">
+            <label th:text="#{register.password_w}" for="password_w" class="required">Passwort</label>
+            <input class="form-control" th:placeholder="#{register.password_w}" name="password_w" type="password" required="required"/>
+        </div>
+        <input class="btn btn-primary" type="submit" th:value="#{register.submit}">
+    </form>
+</div>
+
+<div th:replace="fragments/foot"></div>
+
+<script>
+    const form = document.getElementById("form");
+ 
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        var found = form.mail.value.match(/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi);
+        
+        var birthday = +new Date(form.birthDate.value);
+        var age = ((Date.now() - birthday) / (31557600000));
+        if(age < 18){
+            const div = document.createElement("div");
+            div.textContent = "Sie müssen mindestens 18 Jahre alt sein!";
+            form.birthDate.parentNode.appendChild(div);
+            return;
+        }
+
+        if (!found) {
+            const div = document.createElement("div");
+            div.textContent = "E-Mail ist nicht richtig!";
+            form.mail.parentNode.appendChild(div);
+            return;
+        }
+
+        if(form.password.value != form.password_w.value){
+            const div = document.createElement("div");
+            div.textContent = "Passwort ist nicht gleich!";
+            form.password.parentNode.appendChild(div);
+            form.password_w.parentNode.appendChild(div);
+            return;
+        }
+        if(form.plz.value.length != 5){
+            const div = document.createElement("div");
+            div.textContent = "PLZ ist nicht richtig!";
+            form.plz.parentNode.appendChild(div);
+            return;
+        }
+        
+
+        form.submit();
+    });
+
+</script>
+
+
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title th:text="#{orders.title}">Bestellungen</title>
+</head>
+<body>
+<div class="ui container">
+    <header>
+        <h1 th:text="#{orders.title}">Bestellungen</h1>
+    </header>
+    <nav th:include="navigation :: navigation"></nav>
+    
+    <h2 th:text="#{orders.title}"></h2>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th text="">Daten</th>
+                <th text=""></th>
+                <th text=""></th>
+            </tr>
+            </thead>
+        <tbody>
+            <div class="ui card" th:each="order : ${catalog}">
+            <tr>
+                    <td>
+                    <div class="content">
+                        <a class="header" th:text="${order}">Last Action Hero</a>
+                    </div></td>
+                    <td>
+                        <td> <div th:each="val, stat : *{order}">
+                            <p th:text="${stat.current.name}"></p>
+                            <p th:text="${stat.current.price}"></p>
+                       <!-- identifier für den Platz wäre Sinnvoll -->
+                        </div> </td>
+                    <td>  
+                    <form class="ui form" th:action="@{/checkout}" method="post">
+                        <input type="hidden" name="pid" th:value="${order.id}"/>
+                        <input type="hidden" name="endDate" th:value="${order.getEndDate()}"/>
+                        <button type="submit" class="ui labeled icon button">
+                            <i class="icon remove"></i><span th:text="Checkin"> Werte aktualisieren</span>
+                        </button>
+                    </form></td> 
+                    <td>
+                        <form class="ui form" th:action="@{/cancel}" method="post">
+                        <input type="hidden" name="order" th:value="${order.id}"/>
+                        <input type="hidden" name="pid" th:value="${order.id}"/>
+                        <input type="text" name="reason" th:value="test"/>
+                        <button type="submit" class="ui labeled icon button">
+                            <i class="icon remove"></i><span th:text="Stornieren"> Werte aktualisieren</span>
+                        </button>
+                    </form></td>      
+                </div>
+            </div>
+        </tr>   
+                                        
+
+        </tbody>
+    </table>
+
+
+</div>
+</body>
+</html>

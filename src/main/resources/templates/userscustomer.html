@@ -1,0 +1,87 @@
+<div th:replace="fragments/head"></div>
+
+<div class="ui container">
+  <header>
+    <h1 th:text="#{customers.title}">Kundenliste</h1>
+  </header>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th>
+          <a
+            class="item"
+            href="usersemployee.html"
+            th:href="@{/usersemployee}"
+            text=""
+            >Angestellte</a
+          >
+        </th>
+
+        <th>
+          <a
+            class="item"
+            href="userscustomer.html"
+            th:href="@{/userscustomer}"
+            text=""
+            >Kunden</a
+          >
+        </th>
+      </tr>
+    </thead>
+  </table>
+
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th th:text="#{customers.name}">Name</th>
+        <th text="">Anschrift</th>
+        <th text="">Geburtstag</th>
+        <th th:text="#{customers.role}">Rolle</th>
+        <th text="">Historie</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody th:remove="all-but-first">
+      <div th:each=" customer : ${customerList}">
+        <tr>
+          <div th:if="${customer.userAccount.hasRole('CUSTOMER')}">
+            <td th:text="${customer.getName()}">Paul Test</td>
+            <td>
+              <div th:text="${customer.getStreet()}">Straße 46></div>
+              <div th:text="${customer.getCity()}">Stadt></div>
+            </td>
+            <td
+              th:text="${#temporals.format(customer.getBirthDate(), 'dd.MM.yyyy')}"
+            ></td>
+
+            <div th:each="val, stat : *{customer.userAccount.getRoles()}">
+              <td th:text="${val}"></td>
+              <td>
+                <a
+                  class="item"
+                  href="orderhistory.html"
+                  th:href="@{/findOrders/{account} (account=${customer.userAccount.id})}"
+                  sec:authorize="hasAnyRole('BOSS','EMPLOYEE')"
+                  method="GET"
+                  th:text="#{nav.orders}"
+                  >Bestellungen</a
+                >
+              </td>
+              <td>
+                <a
+                  class="item"
+                  href="perma.html"
+                  th:href="@{/findPermaByAccount/{account} (account=${customer.userAccount.id})}"
+                  method="GET"
+                  >Aktive Dauercampingplätze</a
+                >
+              </td>
+            </div>
+          </div>
+        </tr>
+      </div>
+    </tbody>
+  </table>
+</div>
+<div th:replace="fragments/foot"></div>

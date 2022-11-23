@@ -1,0 +1,46 @@
+<div th:replace="fragments/head"></div>
+
+
+<div class="container-fluid">
+    
+<div class="content">
+    <h2 th:text="'Buchungen von ' + ${user.getName()}"></h2>
+    <table class="table table-hover">
+
+        <thead>
+        <tr>
+            <th text="">Vom</th>
+            <th text="">Bis</th>
+            <th text="">Platz</th>
+            <th text="">Status</th>
+            <th text="">Zahlungsart</th>
+            <th text="">Platz (inkl Rabatt)</th>
+            <th text="">Extras</th>
+            <th text="">Gesamt (inkl Rabatt)</th>
+        </tr>
+        </thead>
+        <tbody>                         
+            <tr th:each="reservation : ${reservations} ">
+                    <td th:text="${#temporals.format(reservation.startDate, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${#temporals.format(reservation.endDate, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${reservation.getCampSite()}"></td>
+                    <td>Reservierung</td>
+                    <td></td>
+                    <td th:text="${reservation.getCompleteCostsRounded()}"></td>
+
+                </tr>                     
+                <tr th:each="order : ${orders} ">
+                    <td th:text="${#temporals.format(order.startDate, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${#temporals.format(order.endDate, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${order.getCampingSite()}"></td>
+                    <td th:text="${order.orderStatus}"></td>
+                    <td th:text="${order.getPayment()}"></td>
+                    <td th:text="${order.getCompleteCostsRounded()}"></td>
+                    <td th:text="${order.getExtrasTotalRounded()}"></td>
+                    <td th:text="${order.getCompleteCostsDiscountedMoneyRounded()}"></td>
+                </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/foot"></div>

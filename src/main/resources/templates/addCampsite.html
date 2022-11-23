@@ -1,0 +1,78 @@
+<div th:replace="fragments/head"></div>
+
+<div class="ui container">
+    <header>
+        <h1>Neuen Platz erstellen</h1>
+    </header>
+
+    <div>
+        <form sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="ui form" th:action="@{/addCampsite}" method="post">
+            <div>
+                <label for="name">Name des Platzes:</label>
+            </br>
+                <input class="form-control" type="text" id="nameid" name="name" />
+            </div>
+        </br>
+            <div>
+                <label for="size">Größe des Platzes:</label>
+            </br>
+                <select class="form-control" name="size" id="size">
+                    <option th:value="SMALL" th:text="klein"></option>
+                    <option th:value="'MEDIUM'" th:text="mittel"></option>
+                    <option th:value="'LARGE'" th:text="groß"></option>
+                </select>
+            </div>
+        </br>
+            <div>
+                <label for="parkingsize">Parkoptionen:</label>
+            </br>
+                <select class="form-control" name="parking" id="parking">
+                    <option th:value="NO" th:text="keiner"></option>
+                    <option th:value="'BIKE'" th:text="Motorrad"></option>
+                    <option th:value="'CAR'" th:text="Auto"></option>
+                    <option th:value="'TRAILER'" th:text="Campingwagen"></option>
+                </select>
+            </div>
+        </br>
+            <div>
+                <label for="info">Beschreibung:</label>
+            </br>
+                <textarea class="form-control" id="info" name="info" cols="40" rows="5"
+                    required="required"></textarea>
+            </div>
+        </br>
+            <div>
+                <label for="price">Preis:</label>
+                <input class="form-control" type="number" step="any" min="0" name="price"/>
+            </div>
+        </br>
+            <div>
+                <label for="visibility">Sichtbarkeit in der Platzansicht:</label>
+            </br>
+                <select class="form-control" name="visibility" id="visibility">
+                    <option th:value="'VISIBLE'" th:text="sichtbar"></option>
+                    <option th:value="'NOT_VISIBLE'" th:text="versteckt"></option>
+                </select>
+            </div>
+        </br>
+            <div>
+                <label for="permacamper">Sichtbarkeit in der Platzansicht:</label>
+          
+                <select class="form-control" name="permacamper" id="permacamper">
+                    <option th:value="'PERMACAMPER'" th:text="Dauercampingplatz"></option>
+                    <option th:value="'NOT_PERMACAMPER'" th:text="keinDauercampingplatz"></option>
+                </select>
+            </div>
+
+        </br>
+    </br>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-check" aria-hidden="true"></i><span th:text="'&nbsp; &nbsp;' + 'Erstellen'"> Platz erstellen</span>
+            </button>
+
+        </form>
+
+    </div>
+</div>
+<div th:replace="fragments/foot"></div>

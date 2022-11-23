@@ -1,0 +1,23 @@
+image:https://github.com/HOME-programming-lab/SP2021Group2/blob/Prototyp2JakobTimo/src/main/resources/static/resources/img/campsite.jpg[]
+
+== Campingplatz Below-The-Sun 
+
+Dies ist ein Prototyp für die Verwaltungssoftware des Campngplatzes Below-The-Sun, welcher von der Gruppe 2 der HS-Merseburg aus einem initialen Template erarbeitet wurde. 
+
+Der Platz ist aufgrund seiner guten Lage stark frequentiert, so daß die derzeit noch vorherrschende Papierbuchhaltung zu viel Zeit kostet. Auf dem Campingplatz werden verschiedene Dienste angeboten, deren gesamte Abwicklung das Programm unterstützen soll.
+
+Das wichtigste dabei ist natürlich die Verwaltung/Vergabe der Stellplätze. Below-The-Sun hat eine gewisse Anzahl von verschieden dimensionierten Zelt- und Lagerplätzen. An einigen ist direkt ein Parkplatz für Auto, Motorrad oder Campingwagen angegliedert. Alle Kombinationen sind hier denkbar. Eine telefonische und Online-Vorreservierung der Plätze soll möglich sein, die Reservierungen werden aber am Morgen nach dem geplanten Anreisetermin gelöscht und der Platz steht anderen Campern wieder zur Verfügung. Jeder Kunde wird bei seiner Ankunft registriert und erhält den gewünschten Platz automatisch zugewiesen. Sollte kein den Anforderungen des Kunden entsprechender Stellplatz mehr vorhanden sein, so muß der Betreiber nach einer möglichst passenden Alternative suchen können. Eventuell kann der Camper sein Auto beispielsweise auf einem anderen Parkplatz abstellen oder ist mit einem kleineren Platz zufrieden. Gruppen erhalten Gruppenrabatte auf die Plätze. Ein gesonderter Bereich von Below-The-Sun ist in sogenannte Saisonstellplätze aufgeteilt. Hier bekommen Dauercamper jedes Jahr von April bis Oktober denselben Platz zugewiesen, sofern sie sich rechtzeitig anmelden. Jeder Lagerplatz kann durch Verschmutzung oder technischen Defekt ausfallen und bei der Reparatur Kosten verursachen. Das Programm soll dieser Tatsache Rechnung tragen.
+
+Natürlich muß auch der Verbrauch an Strom und Wasser abgerechnet werden. Die Stellplätze für Dauercamper haben entsprechende Anschlüsse mit Stromzählern und Wasseruhren. Hier kann der Verbrauch direkt abgelesen werden, die Abrechnung erfolgt monatlich oder bei der endgültigen Abreise. Alle anderen Kunden bezahlen Pauschalbeträge pro Tag, sie bekommen bei der Abreise eine Gesamtrechnung über Platzgebühren und Nebenkosten.
+
+Schließlich möchte der Campingplatzbesitzer auch Bilanzfunktionen im Programm eingebaut haben. Vorstellbar hier sind Monats- und Jahresbilanzen, Auslastung der einzelnen Stellplatztypen, notwendige Reparaturausgaben usw.
+
+Um seinen Kunden den Aufenthalt noch abwechslungsreicher zu gestalten, verleiht der Betreiber von Below-The-Sun auch Sportgeräte: Bälle, Tischtennisgarnituren, Volleyballnetze und Federballsets. Dabei müssen die Camper eine Leihgebühr bezahlen und eine Kaution von 30 Euro hinterlegen, die sie nach Rückgabe des unversehrten Gerätes wieder ausgehändigt bekommen. Über den Aufbau einer Fahrradvermietung wird ebenfalls nachgedacht.
+
+
+
+
+== Weitere Informationen können hier gefunden werden.
+
+* link:src/main/asciidoc/pflichtenheft.adoc[Anforderungsspezifikation (Pflichtenheft)]
+* link:src/main/asciidoc/developer_documentation.adoc[Entwicklerdokumentation (Software-Entwurf)]

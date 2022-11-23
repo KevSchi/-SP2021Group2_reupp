@@ -1,0 +1,164 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text></help_text><element><id>UMLClass</id><coordinates><x>897</x><y>322</y><w>210</w><h>330</h></coordinates><panel_attributes>CampSite
+--
+-id: int                
+-name: String
+-groupId: int                                 
+-isSeasonPlace: boolean
+-isRented: boolean
+-hasParkingPlace: boolean
+-info: String[]
+-isDefect
+
+
+--
+_Functions_
+/+add()/
+/+remove()/
+/+edit()/
+/+rent()/
+/+setDefect()/
+/+editInfo()/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>897</x><y>718</y><w>210</w><h>150</h></coordinates><panel_attributes>PriceGroup
+--
+-id: int
+-name: String
+-dailyPrice: float
+-area: float
+
+--
+_Funktions_
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1007</x><y>1032</y><w>210</w><h>240</h></coordinates><panel_attributes>Booking
+--
+-id: int
+-name: Client.name                        
+-timePeriod: TimePeriod 
+-group: null or group.id: int              
+-campingPlaceId: CampSite           
+-extras: extra.id: id                          
+-isPayed: boolean
+-currentPayment: float
+
+--
+_Functions_
+/+editPayment()/
+/+calulatePayment()/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1017</x><y>1342</y><w>190</w><h>180</h></coordinates><panel_attributes>TimePeriod
+--
+-startDate: Date
+-endDate: Date
+
+--
+_Functions_
+/+setStart()/
+/+setEnd()/
+/+getTimePeriod()/
+/+istActive()/</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1247</x><y>602</y><w>210</w><h>140</h></coordinates><panel_attributes>Group
+--
+-id: int 
+-families: families[]                     
+-campSites: CampSite[]                 
+
+--
+_Functions_
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1347</x><y>1042</y><w>210</w><h>190</h></coordinates><panel_attributes>Client
+--
+-id: int
+-name: String
+-adress: String
+-phonenumber: String
+-isPermanentCamper: boolean
+-roule: int
+
+--
+_Functions_
+/+editPermaCamper()/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>457</x><y>1292</y><w>210</w><h>230</h></coordinates><panel_attributes>RentableObject
+--
+-id: int
+-name: String
+-price: float
+-amount: int
+-guarantee: float
+-isPaidBack: boolean
+
+--
+_Functions_
+/+increaseAmount()/
+/+decreaseAmount()/
+/+setPaidBack()/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>617</x><y>1032</y><w>230</w><h>190</h></coordinates><panel_attributes>Extras
+--
+-id: int
+-rentableObjects: rentableObject []
+-cleanings: cleaning[] 
+-waterAndElectricity: WaterAndElectricity
+
+
+--
+_Functions_
+/+addRentableObjects()/
+/+addCleaning()/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>707</x><y>1292</y><w>210</w><h>120</h></coordinates><panel_attributes>Cleaning
+--
+-id: int
+-name:String
+-price: float
+
+--
+_Functions_
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>347</x><y>1032</y><w>200</w><h>190</h></coordinates><panel_attributes>WaterAndElectricity
+--
+-id: int
+-lastWaterMeter: float
+-actual WaterMeter: float
+-lastPowerMeter: float
+-actualPowerMeter: float
+
+--
+_Functions_
+/+waterCosts()/
+/+electricityCosts()/
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1227</x><y>322</y><w>240</w><h>190</h></coordinates><panel_attributes>CampSiteManagment
+--
+-AllCampSites: CampSite[]
+-AllClients: Client[]
+-AllFamilies: Family[]
+-AllGroups: Group[]
+-AllRentableObjects: RentableObjects[]
+-CampSiteManager: Client
+-CampSiteCoworker: Client[]
+
+--
+_Functions_
+/+findGroupCampSites()/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1347</x><y>502</y><w>50</w><h>120</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..*</panel_attributes><additional_attributes>10;100;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1247</x><y>792</y><w>210</w><h>160</h></coordinates><panel_attributes>Family
+--
++id: int
+-contactPerson: Client
+-otherPeople: Clients[]
+-booking: Booking
+-group: Group
+-boolean: inInGroup
+
+--
+_Functions_
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1337</x><y>732</y><w>50</w><h>80</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..*</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1167</x><y>903</y><w>100</w><h>150</h></coordinates><panel_attributes>lt=&lt;-
+1..1</panel_attributes><additional_attributes>10;130;10;10;80;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1447</x><y>902</y><w>80</w><h>160</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..*</panel_attributes><additional_attributes>40;140;40;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1097</x><y>402</y><w>150</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..*</panel_attributes><additional_attributes>10;10;130;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1096</x><y>502</y><w>170</w><h>330</h></coordinates><panel_attributes>lt=&lt;-
+m1=1..1</panel_attributes><additional_attributes>10;10;90;10;90;310;150;310</additional_attributes></element><element><id>Relation</id><coordinates><x>1137</x><y>1262</y><w>50</w><h>100</h></coordinates><panel_attributes>lt=&lt;-
+m1=1..1</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>837</x><y>1082</y><w>190</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+m1=1..1</panel_attributes><additional_attributes>10;10;170;10</additional_attributes></element><element><id>Relation</id><coordinates><x>537</x><y>1103</y><w>100</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..1</panel_attributes><additional_attributes>10;10;80;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1007</x><y>642</y><w>50</w><h>100</h></coordinates><panel_attributes>lt=&lt;-
+m1=1..1</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>631</x><y>1218</y><w>50</w><h>90</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..*</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>771</x><y>1214</y><w>50</w><h>100</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..1</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1457</x><y>392</y><w>160</w><h>670</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..*</panel_attributes><additional_attributes>70;650;70;560;140;560;140;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1447</x><y>432</y><w>100</w><h>450</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..*</panel_attributes><additional_attributes>10;420;80;420;80;10;20;10</additional_attributes></element><element><id>Relation</id><coordinates><x>833</x><y>262</y><w>470</w><h>790</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..*</panel_attributes><additional_attributes>430;60;430;10;10;10;10;720;250;720;250;770</additional_attributes></element><element><id>Relation</id><coordinates><x>313</x><y>187</y><w>1060</w><h>1300</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..*</panel_attributes><additional_attributes>1020;130;1020;10;20;10;10;1280;140;1280</additional_attributes></element></diagram>

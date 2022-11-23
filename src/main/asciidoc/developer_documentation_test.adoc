@@ -1,0 +1,224 @@
+[options="header"]
+[cols="1, 3, 3"]
+|===
+|Version | Bearbeitungsdatum   | Autor 
+|...	| ... | ...
+|===
+
+== Entwicklerdokumentation
+
+== Einführung und Ziele
+=== Aufgabenstellung
+
+
+
+=== Qualitätsziele
+
+Um ein Maß für die Qualität der Anwendung geben zu können müssen Qualitätsziele definiert werden, welche eingehalten werden müssen.
+
+_Anmerkung: Die folgenden Beschreibungen sind von dem https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^] abgeleitet._
+
+Wartungsfreundlichkeit::
+Grad an Effektivität und Effizientz mit welchem ein Produkt für Verbesserungen, Korrekturern oder Anpassungen an Änderungen, in Umwelt oder Anforderungen, geändert werden kann.
+
+Benutzerfreundlichkeit::
+Grad in welchem ein Produkt oder System von bestimmten Nutzer eingesetzt werden kann um bestimmte Ziele effektiv, effizient und zufridenstellend in einem bestimmten Rahmen zu ererichen.
+
+Degree to which a product or system can be used by specified users to achieve specified goals with effectiveness, efficiency and satisfaction #in a specified context of use.#
+
+Sicherheit::
+
+Grad zu welchem das Produkt oder System Informationen und Daten schützt, sodass Personen oder andere Anwendungen und Systeme nur den Grad an Zugriff haben, welcher ihrer Authorisation entspricht,
+
+Die folgende Tabelle zeigt welche Qualitätsziele in welchem Maß erfüllt werden müssen.
+
+Die Erste Spalte listet die Qualitätsziele, während in den weiteren Spalten ein "x" die Wichtigkeit von 1 = Nicht Wichtig bis
+5 = Sehr Wichtig markiert.
+
+
+[options="header", cols="3h, ^1, ^1, ^1, ^1, ^1"]
+|===
+|Qualitätsziel          | 1 | 2 | 3 | 4 | 5
+|Wartungsfreundlichkeit          |   |   |   | x |
+|Benutzerfreundlichkeit                |   |   | x |   |
+|Sicherheit                 |   |   |   | x |
+|===
+
+== Randbedingungen
+=== Hardware-Vorgaben
+Eine Liste der notwendigen Geräte / Hardware um die Anwendung auszuführen und nutzen zu können.
+
+* Server
+* Computer
+* Tastatur
+* Maus
+
+=== Software-Vorgaben
+Eine Liste der notwendigen Software um die Anwendung auszuführen und nutzen zu können.
+
+Die folgende Java Version ist erforderlich um die Anwendung ausführen zu können:
+
+* Java 11 (oder neuer)
+
+Die folgenden Browser Versionen sind mindestens notwendig um die Anwendung nutzen zu können:
+
+* Internet Explorer / Edge 10.0
+* Firefox 4.0
+* Google Chrome 4.0
+* Opera 9.6
+
+=== Vorgaben zum Betrieb des Software
+#Dieser Abschnitt gibt eine Übersicht, wie und unter welchen Bedingungen, das Produkt nach Fertigstellung genutzt werden sollte.#
+
+#This section is going to give an overview of how the product is intended to be used upon completion and under which circumstances.#
+
+Das System wird für die Buchung und Verwaltung des Campingplatzes  {company_name} eingesetzt werden. Die Anwendung soll auf einem Server laufen und per Browser über das Internet 24/7 zugänglich sein.
+
+Laut link:https://de.statista.com/statistik/daten/studie/748314/umfrage/camping-urlauber-in-deutschland-nach-alter/[Statista] ist die Demographie der Campingplatzbesucher relativ gleichmäßig über alle Altersgruppen verteilt. Daher kann davon ausgegangen werden, dass die Computerkenntnisse der Seitennutzer stark variieren werden. Gleiches gilt für die Anwender auf Seiten des Campingplatzes.
+
+Das System soll keine Wartungen benötigen, da es gedacht ist die Arbeit des Personals zu erleichtern, Alle Daten sollen Persistent in einer Datenbank gesichert werden und durch die Anwendung zugänglich sein.
+
+
+
+== Kontextabgrenzung
+* Kontextdiagramm
+
+[[context_diagram]]
+image::./images/KontextDiagramm.png[Kontext Diagramm, 100%, 100%, pdfwidth=100%, title= "Kontextdiagramm von {project_name}", align=center]
+
+== Lösungsstrategie
+=== Erfüllung der Qualitätsziele
+ 
+_Note: Die folgende Tabelle zeigt die zuvor definierten Qualitätsziele und wie diese umgesetzt werden._
+
+[options="header"]
+|=== 
+|Qualitätsziel |Lösung
+|Wartungsfreundlichkeit a|
+* *Erweiterbarkeit* Die Anwendung besteht aus gesonderten Komponenten, sodass Änderungen weniger Auswirkungen auf andere Komponenten haben.
+* *Wiederverwendbarkeit* Sicherstellen, dass Komponenten des System bei anderen wiederverwendet werden können.
+* *Anpassbarkeit* Sicherstellen, dass die Anwendung angepasst oder erweitert werden kann ohne, dass Fehler auftreten oder die Qualität gemindert wird.
+|Nutzerfreundlichkeit a|
+* *Anwendbarkeit* Sicherstellen, dass das System einfach von seinen Nutzern verstanden und genutzt werden kann. Dies kann unter Anderem durch den Einsatz von Beschriftungen und Tooltips, welche geforderte Eingaben eindeutig beschreiben, erreicht werden.
+* *Schutz des Nutzers / Fehlerbehandlung* Den Nutzer davor bewahren Fehler zu machen. Falsche Eingaben dürfen nicht zu fehlerhaften Systemstatus führen.
+* *UI aesthetics* #Provide a pleasing and satisfying interaction for the user.#
+* *Zugänglichkeit* Sicherstellen, dass verschiedenste Leute das System vollständig nutzen können. Dies kann durch bspw. entsprechende Schriftgrößen und Farbkontraste erreicht werden.
+|Sicherheit a|
+* *Vertraulichkeit* Sicherstellen, dass Daten nur authorisierten Personen zugänglich sind. Dies kann durch den Einsatz von _Spring Security_ und _Thymeleaf_ (`sec:authorize`) erreicht werden.
+* *Integrität* Unauthorisierte Änderungen von Daten verhindern. Dies kann durch _Spring Security_ (`@PreAuthorize`) erreicht werden.
+* *Verantwortlichkeit* Eindeutige nachverfolgbarkeit von Aktionen oder Ereignissen zu einer Entität oder Person. Um dies zu erreichen soll jeder Vorgang mit einem "Kunden" verknüpft sein.
+|===
+
+=== Softwarearchitektur
+* Beschreibung der Architektur anhand der Top-Level-Architektur oder eines Client-Server-Diagramms
+
+=== Entwurfsentscheidungen
+==== Verwendete Muster
+
+* Spring MVC
+
+==== Persistenz
+Die Anwendung nutzt *Hibernate annotation based mapping* tum Java Klassen auf Datenbanken abzubilden. Als Datenbank kommt *H2* zum Einsatz.
+Die Persistenz ist standardmäßig deaktiviert, kann jedoch durch das Entfernen der # vor den Zeilen 
+....
+# spring.datasource.url=jdbc:h2:./db/videoshop
+# spring.jpa.hibernate.ddl-auto=update
+....
+in der Datei _application.properties_ aktiviert werden.
+
+==== Benutzeroberfläche
+dialogue map
+
+==== Verwendung externer Frameworks
+
+[options="header"]
+|===
+|External package |Used by (applications' class)
+|salespointframework.catalog a|
+* catalog.Disc
+* catalog.VideoCatalog
+* order.OrderController 
+|salespointframework.core a|
+* catalog.CatalogInitializer
+* customer.CustomerDataInitializer
+* inventory.InventoryInitializer
+|salespointframework.inventory a|
+* catalog.CatalogController
+* inventory.InventoryController
+* inventory.InventoryInitializer
+|salespointframework.order | order.OrderController
+|salespointframework.payment | order.OrderController
+|salespointframework.quantity a|
+* catalog.CatalogController
+* inventory.InventoryInitializer
+* order.OrderController
+|salespointframework.SalespointSecurityConfiguration |videoshop.WebSecurityConfiguration
+|salespointframework.time | catalog.CatalogController
+|salespointframework.useraccount a|
+* customer.Customer
+* customer.CustomerDataInitializer
+* customer.CustomerManagement
+* order.OrderController
+|springframework.boot |videoshop.VideoShop
+|springframework.data a|
+* catalog.VideoCatalog
+* customer.CustomerManagement
+* customer.CustomerRepository
+|springframework.security | videoshop.WebSecurityConfiguration
+|springframework.ui a|
+* catalog.CatalogController
+* customer.CustomerController
+* inventory.InventoryController
+* order.OrderController
+|springframework.util a|
+* customer.CustomerController
+* customer.CustomerDataInitializer
+* order.OrderController
+|springframework.validation |customer.CustomerController
+|springframework.web |videoshop.VideoShopWebConfiguration
+|===
+
+
+== Bausteinsicht
+* Entwurfsklassendiagramme der einzelnen Packages
+
+[options="header"]
+|=== 
+|Klasse/Enumeration |Description
+|...|...
+|===
+
+=== Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
+_Die folgende Tabelle zeigt die Rückverfolgbarkeit zwischen Entwurfs- und Analysemodell. Falls eine Klasse aus einem externen Framework im Entwurfsmodell eine Klasse des Analysemodells ersetzt,
+wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwendung* mithilfe der folgenden Begriffe definiert:_
+
+* Inheritance/Interface-Implementation
+* Class Attribute
+* Method Parameter
+
+[options="header"]
+|===
+|Klasse/Enumeration (Analysemodell) |Klasse/Enumeration (Entwurfsmodell) |Art der Verwendung
+|...|...|...
+|===
+
+== Laufzeitsicht
+* Darstellung der Komponenteninteraktion anhand eines Sequenzdiagramms, welches die relevantesten Interaktionen darstellt.
+
+== Technische Schulden
+=== Quality Gates
+_Hinweis: In diesem Abschnitt werden alle fehlgeschlagenen Quality Gates aufgelistet. Diese Bewertungen reichen von *A* (am besten) bis *E* (am schlechtesten)._
+[options="header"] 
+|===
+| Quality Gates | Istwert | Ziel 
+| _X_ | _X_ | _X_
+|===
+
+=== Probleme
+_Hinweis: In diesem Abschnitt werden alle SonarQube-Probleme mit den Prioritäten *Blocker*, *Kritisch* und *Major* sowie häufig auftretende *Minor*-Probleme aufgelistet_
+[options="header"]
+[options="header", cols="1, 2, 2, 2"]
+|===
+| Priorität | Beschreibung | Standort | Entsprechendes Qualitätstor 
+| _X_ | _X_ | _X_ | _X_
+|===

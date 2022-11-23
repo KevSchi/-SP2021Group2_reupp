@@ -1,0 +1,115 @@
+= Test-Plan
+
+Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
+
+== Einführung
+Diese Tests werden umgesetzt, damit sichergestellt werden kann, dass die wichtigesten Testfälle funktionieren.
+
+Das Dokument wird für den Kunden erstellt, um die Gewährleistung bestimmter Funktionalitäten zu geben. Weiterhin werden die Testfälle für uns zur Selbstkontrolle erstellt.
+
+== Aufbau der Testbezeichner
+
+
+*U - Unit Test, I - Integrationstest*
+
+
+
+
+== Zu testende Funktionalitäten
+
+* Anmelden bzw. Registrierung+
+- mit richtigen Daten 
+- mit flaschen Daten 
+- login Mitarbeiter 
+- login Besitzer
+- login Kunde
+- Registrierung Kunde 
+- Erstellen eines Mitarbeiters 
+
+
+* Reservierung 
+- Reservierung verschiedner Platztypen 
+- Gruppenreservierung 
+
+* Buchung 
+- Gruppenbuchung 
+- Leihobjekte hinzufügen 
+- Eingabe Strom- und Wasserwerte bzw. Kosten 
+
+== Nicht zu testende Funktionalitäten
+
+Die Funktionalität von Spring, Salespoint, Springboot, Thymeleaf, Bootstrap wird vorausgesetzt. +
+
+
+== Herangehensweise
+
+Tests für die verschiedenen Testfälle werden konstruiert und implementiert.
+
+== Umgebungsvoraussetzungen
+
+* Einen an das Internet angeschlossenen Server, zum bereitstellen des Webservers muss vorhanden sein.
+
+* Es wird ein Internetfähiges Endgerät mit aktuellem Webbrowser zum Testen der Funktionalität benötigt. 
+
+* Die Daten werden in den Testfällen hardgecodet. 
+
+* Der Server muss Java (Verion 11+) bereitstellen. 
+
+* Die Kommunikation wird auf verschiedenen Wegen (Internet und Lokales Netzwerk) getetst. 
+
+
+== Testfälle und Verantwortlichkeit
+Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
+
+// See http://asciidoctor.org/docs/user-manual/#tables
+[options="headers"]
+Unit Tests
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|(J,F)|Status eines Campingplatzes ändern|Campingplatz muss existieren|Status.belegt / Status.frei / Status.defekt|Erfolgreich ohne Fehler
+|(J,F)|Beschreibung eines Campingplatztes bearbeiten|Campingplatz muss existieren|Informationstext|Erfolgreich ohne Fehler
+|(J,F)|Hinzufügen von Familie in einer Gruppe|Gruppe muss existieren|neue Familie|Erfolgreich ohne Fehler
+|(J,F)|Hinzufügen von Familienmitglieder in eine Familie|Familie muss existeren|neues Familienmitglied|Erfolgreich ohne Fehler
+|(J,F)|Ausgabe aller Familienmitglieder in einer Familie|Familie muss existen|Printbefehl|Alle Familienmitglieder in einer Familie 
+|(J,F)|Hinzufügen des Gruppenrabatts in der Buchung|Gruppe aus mindestens zwei Familien und Buchung müssen existieren|Rabatt|Buchungen mit berechneten Rabatt
+|(K)|Anzahl eines Extras ändern|Extra muss existieren|Zahlenwert|Erfolgreich ohne Fehler
+|(K)|Name eines Extras ändern|Extra muss existieren|Name|Erfolgreich ohne Fehler
+|(K)|Preis eines Extras ändern|Extra muss existieren|Zahlenwert|Erfolgreich ohne Fehler
+|(T) |Zeitraum reservieren |Es muss ein Platz existieren und der Zeitraum muss frei sein  |Daten |Erfoglreich ohne Fehler
+|(T) |Kosten anzeigen  |Es muss eine Buchung vorliegen|Extras       |Preis des Platzes plus der Extras
+|===
+
+Integrationstests
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|(J,F)|Erstellung eines Campingplatzes|Eingabemaske muss fuktionieren|Name, Status, Preis, Bild, Parkplatz, Größe, Beschreibung|Erfolgreiche Speicherung in der Datenbank 
+|(J,F)|Erstellung einer Gruppe|Eingabemaske muss fuktionieren|Namen der Gruppe, mindestens zwei Familien|Erfolgreiche Speicherung in der Datenbank 
+|(J,F)|Erstellung einer Familie|Eingabemaske muss fuktionieren|Kontaktperson, andere Familienmitglieder|Erfolgreiche Speicherung in der Datenbank 
+|(J,F)|Registrierung eines Kunden|Eingabemaske muss funktionieren|Name, Vorname, Adresse, E-Mail, Geburtsdatum|Registrierung war erfolgreich 
+|(J,F)|Anmelden eines Kunden|Eingabemaske muss funktionieren|E-Mailadresse, Passwort|Weiterleitung in das Benutzerkonto
+|(J,F)|Algemeines testen der GET Methoden aller Controller|Webserver aktiv sein|Parameterübergabe im Browser (/home)|.html (/home.html)
+|(J,F)|Algemeines testen der POST Methoden aller Controller|Webserver aktiv sein|Parameterübergabe im Browser (/home/{campingplatz.id}), drücken des Buttons|.html(/home.html)
+|(J,F)|Anlegen eines Mitarbeiterkonto|Eingabemaske muss fuktionieren|Name, Vorname, Adresse, Telefonummer, Kontodaten, Geburtsdatum|Anlegen des Mitarbeiterkonto war erfolgreich
+|(K)|Erstellung eines Extras|Eingabemaske muss fuktionieren|Name, Anzahl, Preis|Erfolgreiche Speicherung in der Datenbank
+|(K)|Extra zur Buchung hinzufügen|Hinzufügemaske muss fuktionieren|Menüauswahl|Erfolgreiche hinzufügung zur Rechnung
+|(T)|Reservierungen erstellen|Kundenkonto vorhanden|Plätze in den Warenkorb legen | Erstellung von einzelnen Reservierungen für jeden Platz im Warenkorb
+|(T)|Einen Check-in durchführen|Es muss eine Reservierung vorliegen| Name des Ansprechpartners| Erfolgreiche Erstellung einer offenen Buchung
+|(T)|Einen Check-out durchführen|Es muss eine offene Buchung vorliegen| Wurde Bezahlt| Wechsel des Buchungsstatus entsprechend dem Zahlungsstatus
+
+|===
+
+Akzeptanztests
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|(J,F)|Falsche Registrierung eines Kunden|Fehlerabfrage muss funktioniern|Eingabe einer E-Mail ohne @ / .de|Fehlermeldung: "Bitte richige E-Mail angeben"
+|(J,F)|Falsche Anmeldung eines Kontos|Fehlerabfrage muss funktioniern|Falsches Passwort/E-Mail|Fehlermeldung: "Passwort oder E-Mail ist falsch"
+|(J,F)|Nicht ASCII-Zeichen bei Eingaben|Fehlerabfrage muss funktioniern|Nicht ASCII-Zeichen|Fehlermeldung: "invalide Eingabe"
+|(J,F)|Verlinkungen auf den .html Seiten prüfen|Weiterleitungen und Funktionen der Buttons funktionieren|Klick auf die Buttons|Weiterleitung / Reaktion auf den Klick
+|(J,F)|Richtige Anzeige der Grafiken|Grafiken müssen existieren und richtig eingebunden sein|Aufruf einer Grafik|Darstellen der Grafik
+|(J,F)|Richtige Anzeige der Desings|Stylesheet muss existieren und funktionieren|Aufruf der einzelnen Websites|Korrekte anzeige der Weboberfläche
+|(K)|Richtige Anzeige des Extraproduktbildes|Produktbild muss existieren|Anzeigen der Extraübersicht|Produktbild muss sichtbar sein
+|(K)|Extras werden richtig initialisiert|Standardsatz extras muss angelegt sein|Anzeigen der Extraübersicht|Extras müssen vorhanden sein
+|(T)|Reservieren eines bereits reservierten Zeitraums |Es muss bereits ein Platz reserviert sein |Der gleiche Zeitraum auf dem selben Platz   |Reservierung ist nicht möglich
+|(T)|Startdatum nach Enddatum wählen |Es muss ein Platz vorhanden sein  |Wahl eines Startdatums, welches hinter dem Enddatum liegt   |Fehlermeldung "Startdatum darf nicht vor dem Enddatum liegen"
+
+|===

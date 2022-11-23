@@ -1,0 +1,156 @@
+<div th:replace="fragments/head"></div>
+
+<div class="ui container">
+    <header>
+        <h1>Platz bearbeiten</h1>
+    </header>
+
+    <div>
+        <form sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="ui form" th:action="@{/campsite/change/}" method="post">
+            <label for="name">Name des Platzes:</label>
+            <input type="hidden" name="id" th:value="${campsite.id}" />
+            <input class="form-control" type="text" id="nameid" name="name" th:value="${campsite.name}" />
+
+            <br />
+
+            <div>
+                <label for="size">Größe des Platzes:</label>
+                <br />
+                <select class="form-control" name="size" id="size">
+                    <option th:value="SMALL" th:text="klein"></option>
+                    <option th:value="'MEDIUM'" th:text="mittel"></option>
+                    <option th:value="'LARGE'" th:text="groß"></option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="parkingsize">Parkoptionen:</label>
+                <br />
+                <select class="form-control" name="parking" id="parking">
+                    <option th:value="NO" th:text="keiner"></option>
+                    <option th:value="'BIKE'" th:text="Motorrad"></option>
+                    <option th:value="'CAR'" th:text="Auto"></option>
+                    <option th:value="'TRAILER'" th:text="Campingwagen"></option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="info">Beschreibung</label>
+                <textarea class="form-control" id="info" name="info" cols="40" rows="5"
+                    required="required" th:text="${campsite.description}"></textarea>
+            </div>
+            <br />
+            <div>
+                <label for="price">Preis:</label>
+                <input class="form-control" type="number" step="any" min="0" name="price" th:value="${campsite.getPriceNumber()}" />
+            </div>
+
+            <br />
+
+            <div>
+                <label for="visibility">Sichtbarkeit in der Platzansicht:</label>
+                <br />
+                <select class="form-control" name="visibility" id="visibility">
+                    <option th:value="'VISIBLE'" th:text="sichtbar"></option>
+                    <option th:value="'NOT_VISIBLE'" th:text="versteckt"></option>
+                </select>
+            </div>
+
+            
+            <div>
+                <label for="permacamper">Sichtbarkeit in der Platzansicht:</label>
+                <br />
+                <select class="form-control" name="permacamper" id="permacamper">
+                    <option th:value="'PERMACAMPER'" th:text="Dauercampingplatz"></option>
+                    <option th:value="'NOT_PERMACAMPER'" th:text="keinDauercampingplatz"></option>
+                </select>
+            </div>
+
+            <br />
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-refresh" aria-hidden="true"></i><span th:text="'&nbsp; &nbsp;' + 'Aktualisieren'"> Werte aktualisieren </span>
+            </button>
+
+        </form>
+
+        <br />
+
+        <form sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="ui form" th:action="@{/campsite/remove/}" method="post">
+            <input type="hidden" name="campsite" th:value="${campsite.id}" />
+            <button type="submit" class="btn btn-danger">
+                <i class="fa fa-trash-o" aria-hidden="true"></i><span th:text="'&nbsp; &nbsp;' + 'Entfernen'"> Platz entfernen </span>
+            </button>
+        </form>
+
+        <br />
+
+    </div>
+</div>
+<div th:replace="fragments/foot"></div>
+
+<!-- <div th:replace="fragments/head"></div>
+
+<div class="ui container">
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th th:text="Platzname">Titel</th>
+                <th th:text="Preis">Anzahl</th>
+                <th th:text="Platzgröße">Preis</th>
+                <th th:text="Parkplatz">Preis</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody th:remove="all-but-first">
+            <tr>
+
+
+
+                <form class="ui form" th:action="@{/campsite/change/}" method="post">
+
+                    <td>
+                        <input type="hidden" name="id" th:value="${campsite.id}" />
+                        <input class="form-control" type="field" name="name" th:value="${campsite.name}" />
+                    </td>
+                    <td>
+                        <input class="form-control" type="field" name="price" th:value="${campsite.price}" />
+                    </td>
+                    <td>
+                        <select class="form-control" name="size" id="size">
+                            <option th:value="SMALL" th:text="klein"></option>
+                            <option th:value="'MEDIUM'" th:text="mittel"></option>
+                            <option th:value="'LARGE'" th:text="groß"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="form-control" name="parking" id="parking">
+                            <option th:value="NO" th:text="keiner"></option>
+                            <option th:value="'BIKE'" th:text="Motorrad"></option>
+                            <option th:value="'CAR'" th:text="Auto"></option>
+                            <option th:value="'TRAILER'" th:text="Campingwagen"></option>
+                        </select>
+                    </td>
+
+                    <td><button type="submit" class="btn btn-primary">
+                            <i class="fa fa-refresh" aria-hidden="true"></i><span th:text="'&nbsp; &nbsp;' + 'Aktualisieren'"> Werte aktualisieren </span>
+                        </button>
+                        </td>
+                </form>
+
+                <form  th:action="@{/campsite/remove}" th:method="post">
+                    <input type="hidden" name="campsite" th:value="${campsite.id}" />
+                    <td> <button type="submit" class="ui labeled icon button">
+                            <i class="icon remove"></i><span th:text="Entfernen"> Werte aktualisieren</span>
+
+                        </button></td>
+                </form>
+                </td>
+            </tr>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="fragments/foot"></div> -->

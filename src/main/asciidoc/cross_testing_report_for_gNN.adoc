@@ -1,0 +1,46 @@
+// Bogen den Sie für das Cross-Testing verwenden können
+
+= Cross-Testing Feedback
+
+__Durchführende Gruppe:__ Gruppe2 Campingplatzverwaltung
+__Anwendung von Gruppe:__ Gruppe1 Apotheke
+
+== Getestetes System
+Apothekenanwendung von Gruppe1
+
+== Fehler-Report
+// See http://asciidoctor.org/docs/user-manual/#tables
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+| http://localhost:8080/login | CUSTOMER Account | Anmedlung mit CUSTOMER Account (nur pharmacyOwner/pharmacyEmployee gehen)| 403 Forbidden, redirect auf "checkout" (unauthorisiert)
+| http://localhost:8080/submitUser | Passwort: kürzer als 8 Zeichen  | __(FMA01)__ | wird nicht geprüft 
+| http://localhost:8080/updateUser | kein Passwort | keine eingabe beim bearbeiten eines Accounts | 500 Internal Server Error
+| http://localhost:8080/updateUser | update DOCTOR PIN länger als 4 Zeichen | __(FMA02)__ / __(FMA11)__ | Validierung fehlt
+| http://localhost:8080/barcodes | - | Aufrufen der Seite __(FMA06)__ | keine Verlinkung in der Navigation
+| http://localhost:8080/lieferservice | - | Aufrufen der Seite | 404 Page Not Found
+| http://localhost:8080/laboratoryOrders | Bestellung löschen | Löschen einer Fertigen Bestellung | kein Button vorhanden, bei mehreren fertigen Bestellungen wird es unübersichtlich
+| http://localhost:8080/laboratorycreateorder | Alles Mögliche | __(FMA08)__ | Welcher Patient? (keine Verknüpfung), Keine Numer vorhanden.
+| http://localhost:8080/laboratorycreateorder | Eindeutig | __(FMA09)__| Eindeutig uneindeutig!
+| http://localhost:8080/redeemorderform | - | Anzeige der einlösbaren Bestellzettel __(FMA10)__ | Anzeige nur die UUID, sehr unleserlich/UNEINDEUTIG!
+| http://localhost:8080/warehouse-overview | - | __(FMA14)__ Anpassung der Ablaufdaten | Keine Bearbeitung möglich
+| http://localhost:8080/ | - | "Aptheke"-Button in Navigation | keine Verlinkung
+| http://localhost:8080/ | - | Rechnung Drucken | PDF-Erstellung nicht möglich
+| http://localhost:8080/userManager | - | Löschen eines Accounts | Account existiert dennoch, anmeldung immernoch möglich
+| http://localhost:8080/userManager | - | Doppelte Accounts | 500 Internal Server Error, wird nicht abgefangen
+| http://localhost:8080/ | - | Aufruf einer Index | keine Index vorhanden
+|===
+
+== Sonstiges
+* Der Größtteil der Eingaben wird nur Client-seitig abgefangen,
+der Server fängt kaum/keine dieser falschen Eingaben ab (z.Bsp: negative Werte). +
+* Bei Nachbestellungen kann jedes Produkt nur ein Mal bestellt werden, bei mehreren eingaben wird das unübersichtlich. + 
+* Anleitung zur Benutzung der Oberfläche ist ungenau, die Anwendung ist schwer zu bedinen, bespielsweise, dass man jedes Item einer Tabelle anclicken müss, dies wird leider nirgendwo erklärt. 
+* Optisch ist die Anwenung auch unästhetisch, aufgrund der überhäuften nutzen von Tabellen. (Fragwürdige Design entscheidung (Mockups sahen besser aus))
+* Bei dem verlängern von Tabellen, kommt es zum verschwinden von Buttons.
+
+== Verbesserungsvorschläge
+* Optik -> Userfreundlicher machen
+* Details -> Detailansichten eindeutiger machen
+* Eingaben -> Auch Server-seitig abfangen, nicht nur Client-seitig
+

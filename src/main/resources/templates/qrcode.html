@@ -1,0 +1,29 @@
+<div th:replace="fragments/head"></div>
+
+<main>
+
+<form class="w-400 mw-400 m-auto" role="form" th:action="@{/confirm-secret}" method="post">
+    <header class="ui container">
+        <h1>Vielen Dank</h1>
+    </header>
+    <div class="ui container" id="qr">
+        <p>Scan den Barcode mit einer Google Authenticator kompatiblen App
+            <br/><a href="https://play.google.com/store/apps/details?id=com.beemdevelopment.aegis">Android</a> and 
+               <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605">iPhone</a>
+        </p>
+        <br/>
+         <img th:src="${twoFaQrUrl}"/>
+    </div> 
+    <br/>
+    <p>Oder gib den folgenden Schlüssel ein</p>
+    <p th:text="${secret}"></p>
+    <br/>
+        <input type="hidden" name="username" th:value="${name}">
+        <input type="number" class="form-control" name="code" autofocus="autofocus"
+            placeholder="Code" required="required">
+   
+    <input class="btn btn-primary" type="submit" value="Absenden">
+</form>
+</main>
+
+<div th:replace="fragments/foot"></div>

@@ -1,0 +1,139 @@
+<div th:replace="fragments/head"></div>
+
+
+
+<div class="ui container">
+    <div class="mw-full">
+        <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+        <div class="card p-0">
+            <!-- p-0 = padding: 0 -->
+            <img th:src="@{/resources/img/campsite.jpg}" src="../static/resources/img/campsite.jpg"
+                class="img-fluid rounded-top" alt="placeholder">
+            <!-- Nested content container inside card -->
+            <div class="content">
+                <h2 class="content-title">
+                    <a class="header" th:text="${campsite.name}">Last Action Hero</a>
+                </h2>
+                <form class="m-auto d-flex flex-wrap" method="post" th:action="@{/cart}"
+                    th:object="${campsite}">
+                    <div class="w-400 mw-full m-15  ">
+
+                        <div class="form-group">
+                            <p class="text-muted">
+                                <span th:text="Größe">Action</span>
+                            </p>
+                            <th:block th:switch="${#strings.toString(campsite.size)}">
+                                <div th:case="'SMALL'">klein</div>
+                                <div th:case="'MEDIUM'">mittel</div>
+                                <div th:case="'LARGE'">groß</div>
+                            </th:block>
+
+                            <br />
+
+                            <p class="text-muted">
+
+                                <span th:text="Stellplatz">Action</span>
+
+                            </p>
+                            <th:block th:switch="${#strings.toString(campsite.parkingSpace)}">
+                                <div th:case="'NO'">Keiner</div>
+                                <div th:case="'BIKE'">Fahrrad</div>
+                                <div th:case="'CAR'">Auto</div>
+                                <div th:case="'TRAILER'">Wohnmobil</div>
+                            </th:block>
+
+                            <br />
+
+                            <p class="text-muted">
+                                <span th:text="Beschreibung">Action</span>
+                            </p>
+                            <span th:text="${campsite.description}">Action</span>
+
+                            <br />
+
+
+                <br />
+
+                <br/>
+
+                
+                <th:block th:switch="${#strings.toString(campsite.permaCamper)}">
+                    <div th:case="'PERMACAMPER'">Dies ist ein Dauercampingplatz </div>
+                    <div th:case="'NOT_PERMACAMPER'"></div>
+                </th:block>
+                 
+
+                <th:block  th:unless="${campsite.isPermaCamper()}">
+                <form class="" method="post" th:action="@{/cart}"  th:object="${campsite}">
+
+                    <input type="hidden" class="form-control" name="pid" value="0" th:value="${campsite.id}" />
+                    <script th:inline="javascript">
+                        var campsite = [[${ dates }]] || [];
+                    </script>
+                    <div th:replace="fragments/calendar"></div>
+
+                    <input style="display: none" id="startDate" type="date" class="form-control" name="start"
+                        th:value="${#dates.createNow()}" />
+                    <input style="display: none" id="endDate" type="date" class="form-control" name="end"
+                        th:value="${#dates.createNow()}" />
+
+                    <!-- https://www.baeldung.com/spring-thymeleaf-error-messages -->
+                    <!-- <div th:if="${#fields.hasErrors('global')}">
+                        <h3>Global errors:</h3>
+                        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+                    </div> -->
+                    <div class="" style="flex: 0 0 100%; text-align: center">
+                        <p style="color:red" th:each="err : ${error}" th:text="${err}" class="error m-15"></p>
+
+                        
+                            <button id="knopf" type="submit" class="btn btn-primary">
+                                <i class="add to cart icon"></i>
+                                <span th:text="#{detail.addToBasket}"> Hinzufügen</span>
+                            </button>
+                      
+
+                        <br>
+                        <span th:text="${{campsite.getPriceRounded()}}">9.99 €</span>
+                    </div>
+                    
+                </form>
+                <div class="ui container">
+                    <a sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="header" th:href="@{/changeCampsite/{id}(id=${campsite.id})}" text="">Bearbeiten</a>
+                </div>
+
+            </th:block>
+            <th:block  th:if="${campsite.isPermaCamper()}">
+                <form class="" method="post" th:action="@{/cart}" th:object="${campsite}">
+                    <input type="hidden" class="form-control" name="pid" value="0" th:value="${campsite.id}" />
+                    
+                    <input id="startDate" type="hidden" class="form-control" name="start"
+                        th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" />
+                    <input id="endDate" type="hidden" class="form-control" name="end"
+                        th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" />
+
+                    <p style="color:red" th:each="err : ${error}" th:text="${err}" class="error"></p>
+
+                   
+                        <button id="knopf" type="submit" class="btn btn-primary">
+                            <i class="add to cart icon"></i>
+                            <span th:text="#{detail.addToBasket}"> Hinzufügen</span>
+                        </button>
+                
+
+                    <br>
+                    <span th:text="${{campsite.getPermaPrice()}}">9.99 €</span>
+                </form>
+                <div class="ui container">
+                    <a sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="header" th:href="@{/changeCampsite/{id}(id=${campsite.id})}" text="">Bearbeiten</a>
+                </div>
+            </th:block>
+            <a class="link" sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" href="campsiteDefect.html" th:href="@{/defect/{id}(id=${campsite.id})}">Defekt</a>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+<div th:replace="fragments/foot"></div>

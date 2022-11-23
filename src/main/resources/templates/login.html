@@ -1,0 +1,28 @@
+<div th:replace="fragments/head"></div>
+
+<div class="container-fluid">
+
+    <form class="w-400 mw-400 m-auto" role="form" th:action="@{/signin}" method="post">
+        <header>
+            <h1 th:text="#{home.title}"></h1>
+        </header>
+        <div class="form-group">
+            <label th:text="#{login.username}" for="username" class="required">Full name</label>
+            <input type="text" class="form-control" name="username" autofocus="autofocus"
+                th:placeholder="#{login.username}" required="required">
+        </div>
+
+        <div class="form-group">
+            <label th:text="#{login.password}" for="password" class="required">Password</label>
+            <input type="password" class="form-control" name="password" autofocus="autofocus"
+                th:placeholder="#{login.password}" required="required">
+        </div>
+    
+        <a href="forgotPass.html" th:href="@{/forgot}">Passwort vergessen?</a>
+        <br>
+        <input class="btn btn-primary" type="submit" th:value="#{login.login}">
+    </form>
+</div>
+
+
+<div th:replace="fragments/foot"></div>

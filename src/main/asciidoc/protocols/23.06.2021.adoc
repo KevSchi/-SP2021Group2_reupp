@@ -1,0 +1,34 @@
+= Protokoll Gruppe 2
+
+Treffen am 23.06.2021
+
+Ort:      Big Blue Button +
+Beginn:   10:00 Uhr +
+Ende:     11:00 Uhr
+
+__Schriftführer:__ Kevin Schimpf
+
+*Nächstes Treffen:* +
+30.06.06.2021, 10:00 Uhr, Big Blue Button
+
+__Teilnehmer:__
+- Sven Karol
+- Johannes Holzhauer
+- Kevin Schimpf
+- Timo Bundt
+- Florian Müller
+- Jakob Dunkel
+- Boleslav Glavatki
+
+== Bemerkungen
+- Probleme beim Packen in eine JAR Datei sind aufgetreten
+- Interesse aller Gruppenteilnehmer am Crosstesting war groß
+
+== Retrospektive des letzten Sprints
+Beinaheabschluss aller Musskriterien vorbereitung auf Crosstesting
+
+== Aktueller Stand
+Initialisierung des Crosstestings
+
+== Planung des nächsten Sprints
+Abschlussbesprechung des Crosstestings

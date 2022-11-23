@@ -1,0 +1,69 @@
+<div th:replace="fragments/head"></div>
+
+<div class="ui container">
+    <header>
+        <h1 th:text="#{customers.title}">Kundenliste</h1>
+    </header>
+
+    <form class="" method="get" th:action="@{/getAccount}">    
+      <td>
+          Email:
+          <input type="field" name="name" />
+      </td>
+      <button id="knopf" type="submit" class="btn btn-primary">
+          <i class="add to cart icon"></i>
+          <span text="">Suchen</span>
+      </button>
+  </form>
+
+    <table class="ui celled table">
+        <thead>
+          <tr>
+            <th th:text="#{customers.name}">Name</th>
+            <th text="">Anschrift</th>
+            <th text="">Geburtstag</th>
+            <th th:text="#{customers.role}">Rolle</th>
+            <th text="">Historie</th>
+            <th></th>
+          </tr>
+        </thead>
+    
+        <tbody th:remove="all-but-first">
+          <div th:each=" customer : ${customerList}">
+            <tr>
+              <div th:if="${customer.userAccount.hasRole('CUSTOMER')}">
+                <td th:text="${customer.getName()}">Paul Test</td>
+                <td>
+                  <div th:text="${customer.getStreet()}">Straße 46></div>
+                  <div th:text="${customer.getCity()}">Stadt></div>
+                </td>
+                <td
+                  th:text="${#temporals.format(customer.getBirthDate(), 'dd.MM.yyyy')}"
+                ></td>
+    
+                <div th:each="val, stat : *{customer.userAccount.getRoles()}">
+                  <td th:text="${val}"></td>
+                  <td>
+                    <form sec:authorize="hasAnyRole('BOSS', 'EMPLOYEE')" class="ui form" method="post" th:action="@{/reserve}">
+                        <input type="hidden"  name="userAccount" id="userAccount" th:value="${customer.userAccount.id}" />
+                        <button type="submit" class="btn btn-primary" text="">Auswählen</button>
+                    </form>
+                    <!-- <form sec:authorize="hasAnyRole('BOSS','EMPLOYEE')" class="ui form" th:action="@{/testbooking}" method="post">
+                      <input type="hidden"  name="userAccount" id="userAccount" th:value="${customer.userAccount.id}" />
+                      <button type="submit" class="btn btn-danger">
+                          <i class="fa fa-plus"></i><span th:text="'&nbsp; &nbsp;' + 'Reservierung erstellen'"> Werte aktualisieren</span>
+                      </button> 
+                  </form> -->
+                  </td>
+                </div>
+              </div>
+            </tr>
+          </div>
+        </tbody>
+      </table>
+    <table><form sec:authorize="hasAnyRole('BOSS', 'EMPLOYEE')" class="ui form" method="get" th:action="@{/getcreateReservation}">
+        <button type="submit" class="btn btn-primary" text="">Kunden erstellen</button>
+    </form></table>
+</div>
+
+<div th:replace="fragments/foot"></div>

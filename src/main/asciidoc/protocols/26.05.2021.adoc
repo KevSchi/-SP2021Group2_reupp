@@ -1,0 +1,41 @@
+= Protokoll Gruppe 2
+
+Treffen am 26.05.2021
+
+Ort:      Big Blue Button +
+Beginn:   10:00 Uhr +
+Ende:     11:00 Uhr
+
+__Schriftführer:__ Johannes Holzhauer
+
+*Nächstes Treffen:* +
+03.06.06.2021, 10:00 Uhr, Big Blue Button
+
+__Teilnehmer:__ 
+
+- Sven Karol
+- Timo Bundt
+- Jakob Dunkel
+- Kevin Schimpf
+- Florian Müller
+- Boleslav Glavatki
+- Johannes Holzhauer
+
+== Bemerkungen
+- (zu) viele Unit-tests
+- verschiede Reservierungen auf einen Platz gehen
+- vorort checkin (?) => Mitarbeiter erstellt Account (?)
+
+== Retrospektive des letzten Sprints
+- Testplan anschauen und Test erarbeiten
+- Funktionen in Haupt-Branch einbinden
+
+== Aktueller Stand
+- Testfälle sind dokumentiert 
+- Design zum Teil hinzugefügt
+- (fast) vollständige Funktionalität der Anwendung
+
+== Planung des nächsten Sprints
+- Login und Registrierung fertig machen
+- Familienmitglieder funktion hinzufügen
+- Rechnung erstellen

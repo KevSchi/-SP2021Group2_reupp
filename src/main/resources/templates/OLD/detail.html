@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    
+    <script src="/src/main/resources/static/resources/JS/script.js" type="text/javascript"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="../static/resources/JS/script.js" type="text/javascript"></script>
+    
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+    <title th:text="${campsite.name}">Last Action Hero</title>
+</head>
+<body>
+<div class="ui container">
+    <header>
+        <h1 th:text="${campsite.name}">Last Action Hero</h1>
+    </header>
+    <nav th:include="navigation :: navigation"></nav>
+  
+    <div class="ui items">
+        <div class="item">
+            <div class="image">
+                <img th:src="@{/resources/img/{name}.jpg(name=${campsite.image})}"
+                     src="../static/resources/img/platzhalter.jpg"/>
+            </div>
+            <div class="content">
+                <a class="header" th:text="${campsite.name}">Last Action Hero</a>
+                <div class="meta">
+                    <span th:text="Parkplatz">Action</span>
+                    <span th:text="${campsite.parkingSpace}">Action</span>
+                   
+                </div>
+                <span th:text="${{campsite.price}}">9.99 €</span>
+                <div class="description">
+                    <p>Vorrat:</p>
+                    <form class="ui form" method="post" th:action="@{/cart}" th:if="${orderable}">
+                        <input type="hidden" name="pid" value="0" th:value="${campsite.id}"/>
+                        <input type="date" name="start" th:value="${#dates.createNow()}" />
+                        <input type="date" name="end" th:value="${#dates.createNow()}" />
+                  
+
+                    
+                    <div sec:authorize="!hasAnyRole('BOSS','EMPLOYEE')" th:if="${quantity}!=0">
+                        <button id= "knopf" type="submit" class="ui labeled icon button">
+                            <i class="add to cart icon"></i>
+                            <span th:text="#{detail.addToBasket}"> Hinzufügen</span>
+                        </button>
+                    </div>
+                    </form>
+
+                    <form class="ui form" method="post" th:action="@{/changeCampsite}">
+                        <input type="hidden" name="pid" value="0" th:value="${campsite.id}"/>
+                      
+            
+
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

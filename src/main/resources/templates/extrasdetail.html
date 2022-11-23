@@ -1,0 +1,47 @@
+<div th:replace="fragments/head"></div>
+
+<body>
+    <table class="ui container">
+        <thead>
+            <tr>
+                <th th:text="Artikel">Titel</th>
+                <th th:text="#{cart.count}">Anzahl</th>
+                <th th:text="#{cart.price}">Preis</th>
+                <th></th>
+                <th></th>
+                <br />
+            </tr>
+        </thead>
+        <tbody th:remove="all-but-first">
+            <tr>
+                <td th:text="${extra.name}"></td>
+                <form class="ui form" th:action="@{/extra/{id}/ (id=${extra.id})}" method="post">
+                    <td>
+                        <input type="number" min="0" name="extraquantity" th:value="${{extra.quantity}}" />
+                      <!--  <input type="field" name="quantity" th:value="${{quantity}}" />-->
+                        <!-- Die Beiden Quantitys sind nicht gleich. Das ändern des Wertes geht bisher nur für Quantity für extra.quantity müsste die 
+                    Funktion im ExtraController geändert werden. -->
+                    </td>
+                    <td>
+                        <input type="number" min="0" name="price" step="any" th:value="${extra.getPriceNumber()}" />
+                        <input type="hidden" name="extra" th:value="${extra.id}" />
+                    <td> <button type="submit" class="ui labeled icon button">
+                            <i class="icon edit"></i><span th:text="#{stock.changePrice}"> Werte aktualisieren</span>
+                        </button></td>
+                </form>
+
+                <form class="ui form" th:action="@{/extra/remove/}" method="post">
+                    <input type="hidden" name="extra" th:value="${extra.id}" />
+                    <td> <button type="submit" class="ui labeled icon button">
+                            <i class="icon remove"></i><span th:text="Entfernen"> Werte aktualisieren</span>
+                        </button></td>
+                </form>
+                </td>
+            </tr>
+
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+<div th:replace="fragments/foot"></div>

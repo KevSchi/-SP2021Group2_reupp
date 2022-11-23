@@ -1,0 +1,38 @@
+<div th:replace="fragments/head"></div>
+
+<div class="ui container">
+    <header>
+        <h1 text="">Katalog</h1>
+    </header>
+           <div class="row">
+            <div class="row col-lg-10">
+                <div th:each="extra : ${extrasCatalog}">
+                    <div class="w-300 mw-550">
+                        <div class="card p-0">
+    
+       
+            <div class="content">
+                <a class="header" th:href="@{/extras/{id}(id=${extra.id})}" th:text="${extra.name}">Last Action
+                    Hero</a>
+                    <div class="image">
+                        <a th:href="@{/extras/{id}(id=${extra.id})}">
+                            <img class="ui container" th:src="@{/resources/img/{image} (image=${extra.image})}"width="290" height="200"
+                                 src="../static/resources/img/ball.png"/>
+                        </a>
+                    </div>
+            </div>
+
+            <div class="content">
+                <div class="description" th:text="${{extra.getPriceRounded()}}">9.99 €</div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<div th:replace="fragments/foot"></div>
+<div id="test" class="ui link cards" th:remove="all-but-first">
+    <div class="content">
+        <a class="header" th:href="@{/addExtra}" th:text="Hinzufügen">Last Action Hero</a>
+    </div>
+</div>

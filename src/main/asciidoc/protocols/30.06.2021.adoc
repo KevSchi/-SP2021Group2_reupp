@@ -1,0 +1,34 @@
+= Protokoll Gruppe 2
+
+Treffen am 30.06.2021
+
+Ort:      Big Blue Button +
+Beginn:   10:00 Uhr +
+Ende:     11:00 Uhr
+
+__Schriftführer:__ Florian Müller
+
+*Nächstes Treffen:* +
+Präsentation: 09.07.2021
+
+__Teilnehmer:__
+- Sven Karol
+- Johannes Holzhauer
+- Kevin Schimpf
+- Timo Bundt
+- Florian Müller
+- Jakob Dunkel
+- Boleslav Glavatki
+
+== Bemerkungen
+- Statistiken werden abgeschlossen
+- Letze Ausbesserung bzw. Ergänzungen in den Dokumenten müssen noch gemacht werden. 
+
+== Retrospektive des letzten Sprints
+Kleinere Anpassungen verschliedener Funktionen. 
+
+== Aktueller Stand
+Anwendungsarbeiten abgeschlossen 
+
+== Planung des nächsten Sprints
+Vorbereitung des Abschlussvortrags 

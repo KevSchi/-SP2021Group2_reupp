@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    
+    <script src="/src/main/resources/static/resources/JS/script.js" type="text/javascript"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="../static/resources/JS/script.js" type="text/javascript"></script>
+    
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+    <title th:text="Titel">Last Action Hero</title>
+</head>
+<body>
+<div class="ui container">
+    <header>
+        <h1 th:text="Titel">Last Action Hero</h1>
+    </header>
+    <nav th:include="navigation :: navigation"></nav>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th th:text="Name">Titel</th>
+            <th th:text="Platzgröße">Anzahl</th>
+            <th th:text="Preis">Preis</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first">
+        <tr>
+                       
+            
+            <form class="ui form" th:action="@{/createExtra/}" method="post">
+                <td >
+                    <input type="field" name="name" th:value="Name"/>
+                </td>
+                <td >
+                    <input type="field" name="price" th:value="0"/>
+                </td>
+                    <td >
+                        <input type="field" name="quantity" th:value="0"/>
+                    </td>
+                    <td><button type="submit" class="ui labeled icon button">
+                    <i class="icon edit"></i><span th:text="Erstellen"> Werte aktualisieren</span>
+                </button></td>
+            </form>
+            
+        </tr>
+        
+        </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>

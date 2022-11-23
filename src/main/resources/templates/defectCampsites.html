@@ -1,0 +1,110 @@
+<div th:replace="fragments/head"></div>
+<br>
+<header>
+    <h1 class="w-600 mw-600 m-auto text-center" >Reparaturen</h1>
+</header>
+<br>
+<div th:if="${defects.size()>0}">
+
+
+    <h2 style="text-align:center" th:text="${header1}"></h2>
+    <table class="table w-600 mw-600 m-auto">
+        <tr>
+            <th text="">Platz</th>
+            <th text="">Grund</th>
+            <th text="">Kosten</th>
+            <th text="">Anfang</th>
+            <th text="">Ende</th>
+            <th text="">Dauer</th>
+            <th text=""></th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <div th:each="defect : ${defects}">
+                <tr>
+                    <td>
+                        <div class="header" th:text="${defect.getName()}"></div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${defect.getReason()}"></div>
+                    </td>
+                    <td>
+                        <div type="number" name="price" class="header" th:text="${defect.getCostsFormatted()}"></div>
+                    </td>
+                    <td>
+                        <div th:text="${#temporals.format(defect?.getStart(), 'dd.MM.yyyy')}"> </div>
+                    </td>
+                    <td>
+                        <div th:text="${#temporals.format(defect?.getEnd(), 'dd.MM.yyyy')}"> </div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${defect?.getDuration()}"></div>
+                    </td>
+                 
+                    <!-- <form class="ui form" th:action="@{/defectDone}" method="post">
+                        <input type="hidden" name="campsite" th:value="${defect.getCampsiteID()}" />
+                        <input type="hidden" name="defect" th:value="${defect.id}" />
+                        <button type="submit" class="btn btn-success btn-sm">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </button>
+                    </form> -->
+                </tr>
+            </div>
+            </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${pastDefects.size()>0}">
+    <h2 style="text-align:center" th:text="${header2}"></h2>
+    <table class="table w-600 mw-600 m-auto">
+        <tr>
+            <th text="">Platz</th>
+            <th text="">Grund</th>
+            <th text="">Kosten</th>
+            <th text="">Anfang</th>
+            <th text="">Ende</th>
+            <th text="">Dauer</th>
+            <th text=""></th>
+        </tr>
+        </thead>
+        <tbody>
+            <div th:each="defect : ${pastDefects}">
+                <tr>
+                    <td>
+                        <div class="header" th:text="${defect.getName()}"></div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${defect.getReason()}"></div>
+                    </td>
+                    <td>
+                        <input type="number" name="price" class="header" th:value="${defect.getCosts()}"></input>
+                    </td>
+                    <td>
+                        <div th:text="${#temporals.format(defect?.getStart(), 'dd.MM.yyyy')}"> </div>
+                    </td>
+                    <td>
+                        <div th:text="${#temporals.format(defect?.getEnd(), 'dd.MM.yyyy')}"> </div>
+                    </td>
+                    <td>
+                        <div class="header" th:text="${defect?.getDuration()}"></div>
+                    </td>
+                 
+                    <!-- <form class="ui form" th:action="@{/defectDone}" method="post">
+                        <input type="hidden" name="campsite" th:value="${defect.getCampsiteID()}" />
+                        <input type="hidden" name="defect" th:value="${defect.id}" />
+                        <button type="submit" class="btn btn-success btn-sm">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </button>
+                    </form> -->
+                </tr>
+            </div>
+            </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="fragments/foot"></div>

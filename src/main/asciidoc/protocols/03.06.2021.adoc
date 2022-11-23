@@ -1,0 +1,48 @@
+= Protokoll Gruppe Campingplatzverwaltung
+
+Treffen am 03.06.2021
+
+Ort: Big Blue Button
+Beginn: 10:00 Uhr
+Ende: 11:00 Uhr
+
+__Schriftführer:__ Boleslav Glavatki
+
+*Nächstes Treffen:* +
+16.06.2021, 10:00 Uhr, Big Blue Button
+
+
+__Teilnehmer:__
+
+- Johannes Holzhauer
+- Kevin Schimpf
+- Timo Bundt
+- Florian Müller
+- Jakob Dunkel
+- Boleslav Glavatki
+
+== Bemerkungen
+-
+
+== Retrospektive des letzten Sprints
+
+
+
+
+
+
+== Aktueller Stand
+- Rechnungen sind vervollständig.
+- Zeitraumbuchung vervollständig.
+- Filter nach Platzgröße und nach Verfügbarkeit vervollständig. 
+- Alternative Parkplätze nur allgemein während auswählen den Zeitraum.
+- Meilensteine Muss Kriterien sind erfüllt. 
+
+== Planung des nächsten Sprints
+
+- Dezimalstellen in Buchungen. 
+- Beheben des Fehlers bei Buchung am Stelle, wann man die Extras zurückgibt (Wasser, Strom). Timo
+- Extras: Anzahl - muss auf Anzahl den Tagen geändert
+- Alternative Parkplatz vervollständigen.
+- Vorbereitung des gesamten Projekt für die andere Gruppe (JAR - Datei, Pflichtheft, Benutzerbuch(einzelne Bottom erklären)).
+

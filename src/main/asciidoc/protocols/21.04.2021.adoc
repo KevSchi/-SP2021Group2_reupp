@@ -1,0 +1,39 @@
+= Protokoll Gruppe 2
+
+Treffen am 21.04.2021
+
+Ort:      Big Blue Button + 
+Beginn:   10:00 Uhr +
+Ende:     11:00 Uhr
+
+__Schriftführer:__ Timo Bundt
+
+*Nächstes Treffen:* +
+28.04.2021, 10:00 Uhr, Big Blue Button
+
+__Teilnehmer:__
+- Sven Karol
+- Johannes Holzhauer
+- Kevin Schimpf
+- Timo Bundt
+- Florian Müller
+- Jakob Dunkel
+- Boleslav Glavatki
+
+== Bemerkungen
+- -
+
+
+== Retrospektive des letzten Sprints
+- Besprechung von GIT-Hub, GitKraken und UMLet
+
+== Aktueller Stand
+- Anmerkungen und Kritik zum aktuellen Stand der Diagrammen. 
+
+- Besprechung der erstellten Diagramme und unserer Vorstellung der Umsetzung der Aufgabe
+
+
+== Planung des nächsten Sprints
+- Anpassung der Diagramme und Erstellung des Pflichtenhefts
+- Erstellen verschiedener Prototypen der Funktionen der Verwaltungssoftware mit Salespoint
+- Erstellen der Developer Documentation
